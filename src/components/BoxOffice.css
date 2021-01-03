@@ -1,0 +1,17 @@
+.movie_list {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+.movie_caption{
+    display: table-caption;
+}
+.movie_row{
+    display: table-row;
+}
+.movie_cell {
+    display: table-cell;
+    text-align: center;
+    border: 1px solid black;
+    vertical-align: middle;
+}
