@@ -1,17 +1,149 @@
-.movie_list {
-    display: table;
-    table-layout: fixed;
-    width: 100%;
+.boxoffice {
+    display: flex;
+    justify-content: center;
 }
-.movie_caption{
-    display: table-caption;
+.boxoffice_movie{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
-.movie_row{
-    display: table-row;
+.boxoffice_movie_wrap {
+    max-width: 170px;
+    min-width: 170px;
+    margin: 30px;
+    position: relative;
 }
-.movie_cell {
-    display: table-cell;
-    text-align: center;
+.boxoffice_movie_inner {
+    display: flex;
+    flex-direction: column;
+}
+.boxoffice_movie_inner_top{
+    position: relative;
+    min-height: 195px;
+    max-height: 195px;
+    max-width: 170px;
+    min-width: 170px;
+    text-decoration: none;
+    color: black;
+}
+.boxoffice_movie_inner_top:hover .front {
+    transform: rotateY(-180deg);
+}
+.boxoffice_movie_inner_top:hover .back {
+    transform: rotateY(0deg);
+}
+.front ,.back {
+    transition: .75s transform;
+}
+.front{
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+.back {
+    transform: rotateY(180deg);
+}
+.back,.front {
+    position: absolute;
+    backface-visibility: hidden;
+}
+.boxoffice_movie_poster{
+    max-width: inherit;
+    max-height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    display: inline-block;
     border: 1px solid black;
-    vertical-align: middle;
+    position: relative;
+}
+.text-align-center{
+    text-align: center;
+}
+.sort_button{
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    transition: 1s all;
+    outline: none;
+}
+.boxoffice_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sort_button_list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.boxoffice_movie_rank_wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -30px;
+    margin-top: -35px;
+    font-size: 2em;
+
+}
+.boxoffice_movie_additional{
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: inherit;
+    max-height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+.boxoffice_movie_poster >span{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.boxoffice_movie_name > h1{
+    font-size: 1.2em;
+}
+.boxoffice_movie_open_date > h5::before {
+    content: "개봉일: ";
+}
+.boxoffice_movie_audi_count > h5::before {
+    content: "관객수: ";
+}
+.boxoffice_movie_audi_accumulate_count > h5::before {
+    content: "누적관객수: ";
+}
+.boxoffice_movie_show_count > h5::before {
+    content: "상영 수: ";
+}
+.boxoffice_movie_sale_accumulate > h5::before{
+    content: "누적매출: ";
+}
+.boxoffice_movie_audience_count > h5::before{
+    contain: "관객 수: ";
+}
+.boxoffice_movie_audience_count > h5::after{
+    contain: "명";
+}
+.boxoffice_movie_sale_today > h5::before {
+    content: "매출: ";
+}
+.boxoffice_movie_audience_count > h5::before {
+    content: "일간: ";
+}
+.boxoffice_movie_audience_accumulate > h5::before {
+    content: "누적: ";
+}
+.boxoffice_movie_audience_count > h5::after {
+    content: "명";
+}
+.boxoffice_movie_audience_accumulate > h5::after {
+    content: "명";
+}
+@media (min-width: 1200px) {
+    .boxoffice_movie {
+        max-width: 1250px;
+        min-width: 1250px;
+    }
 }

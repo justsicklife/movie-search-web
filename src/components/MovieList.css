@@ -1,0 +1,202 @@
+.movielist_wrap {
+    display: flex;
+    justify-content: center;  
+    margin: auto; 
+    flex-direction: column;
+}
+.movielist_movie{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.view_more_button {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+.loading_bar{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: loadingbar_turn;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+.view_more_loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75px;
+    box-shadow: 0px 10px 13px -7px #000000, 4px 5px 15px 5px rgba(0,0,0,0);
+    width: 80%;
+    margin: 0 auto;
+    background-color: rgb(179, 179, 179);
+    border-radius: 10px;
+}
+.view_more_loading_icon{
+    animation-name: loadingbar_turn;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    font-size: 3em;
+}
+@keyframes loadingbar_turn {
+    from {
+        transform: rotate(0deg);   
+    }
+    to {
+        transform: rotate(360deg);   
+    }
+}
+.view_more_button > button{
+    font-size: 3em;
+    width: 100%;
+    height: 75px;
+    box-shadow: 0px 10px 13px -7px #000000, 4px 5px 15px 5px rgba(0,0,0,0);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.movielist_movie_wrap {
+    max-width: 170px;
+    min-width: 170px;
+    margin: 30px;
+    position: relative;
+}
+.movielist_movie_inner {
+    display: flex;
+    flex-direction: column;
+}
+.movielist_movie_inner_top{
+    position: relative;
+    min-height: 195px;
+    max-height: 195px;
+    max-width: 170px;
+    min-width: 170px;
+    text-decoration: none;
+    color: black;
+}
+.movielist_movie_inner_top:hover .front {
+    transform: rotateY(-180deg);
+}
+.movielist_movie_inner_top:hover .back {
+    transform: rotateY(0deg);
+}
+.front ,.back {
+    transition: .75s transform;
+}
+.front{
+    z-index: 2;
+    transform: rotateY(0deg);
+}
+.back {
+    transform: rotateY(180deg);
+}
+.back,.front {
+    position: absolute;
+    backface-visibility: hidden;
+}
+.movielist_movie_poster{
+    max-width: inherit;
+    max-height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    display: inline-block;
+    border: 1px solid black;
+    position: relative;
+}
+.text-align-center{
+    text-align: center;
+}
+.sort_button{
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    transition: 1s all;
+    outline: none;
+}
+.movielist_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sort_button_list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.movielist_movie_rank_wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -30px;
+    margin-top: -35px;
+    font-size: 2em;
+
+}
+.movielist_movie_additional{
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: inherit;
+    max-height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+.movielist_movie_poster >span{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.movielist_movie_name_ko > h1{
+    font-size: 1.2em;
+}
+.movielist_movie_open_date > h5::before {
+    content: "개봉일: ";
+}
+.movielist_movie_audi_count > h5::before {
+    content: "관객수: ";
+}
+.movielist_movie_audi_accumulate_count > h5::before {
+    content: "누적관객수: ";
+}
+.movielist_movie_show_count > h5::before {
+    content: "상영 수: ";
+}
+.movielist_movie_sale_accumulate > h5::before{
+    content: "누적매출: ";
+}
+.movielist_movie_audience_count > h5::before{
+    contain: "관객 수: ";
+}
+.movielist_movie_audience_count > h5::after{
+    contain: "명";
+}
+.movielist_movie_sale_today > h5::before {
+    content: "매출: ";
+}
+.movielist_movie_audience_count > h5::before {
+    content: "일간: ";
+}
+.movielist_movie_audience_accumulate > h5::before {
+    content: "누적: ";
+}
+.movielist_movie_audience_count > h5::after {
+    content: "명";
+}
+.movielist_movie_audience_accumulate > h5::after {
+    content: "명";
+}
+@media (min-width: 1200px) {
+    .movielist_wrap {
+        max-width: 1250px;
+        min-width: 1250px;
+    }
+}

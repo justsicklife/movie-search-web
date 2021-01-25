@@ -1,0 +1,11 @@
+.company_table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.company_row {
+    display: table-row;
+}
+.company_cell {
+    display: table-cell;
+}

@@ -1,64 +1,173 @@
 import React, { useRef, useState } from "react";
 import "./BoxOffice.css";
+import { Link } from 'react-router-dom';
 
-const BoxOffice = ({ movieList, getBoxOffice, loading, error, onGetDate }) => {
-    const [date, setDate] = useState(null);
+const BoxOffice = ({ movieList, getBoxOffice, loading, error, onGetData, onSetSortData }) => {
+    const [date, setDate] = useState("");
 
     const onChange = (e) => {
         e.preventDefault();
         setDate(e.target.value);
-        onGetDate(e.target.value);
+        onGetData(e.target.value);
     }
 
-    if (loading) return <div>로딩중</div>
-    if (error) return <div>에러</div>
+    const onDateSubmit = (e) => {
+        e.preventDefault();
+        if (!date) return
+        getBoxOffice();
+    }
 
-    if (!movieList) return (
-        <form onSubmit={getBoxOffice}>
-            <input type="date"
-                onChange={onChange}
-                value={date}
-            />
-            <input type="submit" onSubmit={getBoxOffice} value="영화 검색" />
-        </form>
-    );
+    const TitleTag = () => {
+        return (
+            <div className="title">
+                <h1>박스오피스</h1>
+            </div>
+        )
+    }
 
-    return (
-        <div>
-            <form onSubmit={getBoxOffice}>
+    const SearchTag = () => {
+        return (
+            <form onSubmit={onDateSubmit}>
                 <input type="date"
                     onChange={onChange}
                     value={date}
                 />
-                <input type="submit" onSubmit={getBoxOffice} value="영화 검색" />
+                <input type="submit" onSubmit={onDateSubmit} value="영화 검색" />
             </form>
-            <div className="movie_list">
-                <div className="movie_row">
-                    <p className="movie_cell">이름</p>
-                    <p className="movie_cell">순위</p>
-                    <p className="movie_cell">개봉일</p>
-                    <p className="movie_cell">상영된수</p>
-                    <p className="movie_cell">누적매출액</p>
-                    <p className="movie_cell">해당일의 매출액</p>
-                    <p className="movie_cell">관객수</p>
-                    <p className="movie_cell">누적관객수</p>
-                    <p className="movie_cell">영화 상세 정보</p>
-                </div>
-                {movieList.map((movie) =>
-                    <div className="movie_row">
-                        <p className="movie_name movie_cell">{movie.movieNm}</p>
-                        <p className="movie_rank movie_cell">{movie.rank}</p>
-                        <p className="movie_open_date movie_cell">{movie.openDt}</p>
-                        <p className="movie_show_count movie_cell">{movie.showCnt}</p>
-                        <p className="movie_sale_accumulate movie_cell">{movie.salesAcc}</p>
-                        <p className="movie_sale movie_cell">{movie.salesAmt}</p>
-                        <p className="movie_audience_count movie_cell">{movie.audiCnt}</p>
-                        <p className="movie_audience_count_accumulate movie_cell">{movie.audiAcc}</p>
-                        <div className="movie_cell">
-                            <button>더보기...</button>
+        )
+    }
+
+    const SortButtonTag = ({ text }) => {
+        return (
+            <button className={`sort_button`}>
+                {text}
+            </button>
+        )
+    }
+
+    const SortButtonGroupTag = () => {
+        return (
+            <div className="sort_button_list">
+                <SortButtonTag text="개봉일" />
+                <SortButtonTag text="순위" />
+                <SortButtonTag text="상영수" />
+                <SortButtonTag text="누적 매출" />
+                <SortButtonTag text="매출액" />
+                <SortButtonTag text="관객수" />
+                <SortButtonTag text="누적관객수" />
+            </div>
+        )
+    }
+
+    const HeaderTag = () => {
+        return (
+            <div className="boxoffice_header">
+                <TitleTag />
+                <SearchTag />
+            </div>
+        )
+    }
+
+
+    if (loading) return <div className="text-align-center">로딩중</div>
+    if (error) return <div className="text-align-center">에러</div>
+
+
+    if (!movieList) return (
+        <HeaderTag />
+    );
+
+    if (movieList.length === 0) return (
+        <>
+            <HeaderTag />
+            <div>정보없음</div>
+        </>
+    );
+
+    const addToContour = (pString) => {
+        let sendString = "";
+        let index = 1;
+        let currentIndex = pString.length - 1;
+        for (let i = pString.length; i > 0; i--) {
+            sendString = pString[currentIndex] + sendString;
+            if (index % 3 === 0 && currentIndex !== 0) sendString = "," + sendString;
+            index++;
+            currentIndex--;
+        }
+        return sendString;
+    }
+
+    const MovieContentTag = ({ content, propertyNm, classNm, isTitle = false }) => {
+        return (
+            <div className={`boxoffice_movie_${classNm}`}>
+                {isTitle ||
+                    <h5>
+                        {content[propertyNm]}
+                    </h5>
+                }
+                {!isTitle ||
+                    <h1>
+                        {content[propertyNm]}
+                    </h1>
+                }
+            </div>
+        )
+    }
+
+    const NumbersTag = ({ classNm, propertyNm, content }) => {
+        return (
+            <div className={`boxoffice_movie_${classNm}`}>
+                <h5>
+                    {addToContour(content[propertyNm])}
+                </h5>
+            </div>
+        )
+    }
+
+    const MovieTag = ({ movieList }) => {
+        return (
+            <div className="boxoffice_movie">
+                {movieList.map((movie) => {
+                    return (
+                        <div key={movie.movieCd} className="boxoffice_movie_wrap">
+                            <div className="boxoffice_movie_rank_wrap">
+                                <MovieContentTag content={movie} propertyNm={"rank"} classNm="rank" />
+                            </div>
+                            <div className="boxoffice_movie_inner">
+                                <Link to={`/movie/detail/${movie.movieCd}`} className="boxoffice_movie_inner_top">
+                                    <div className="boxoffice_movie_poster front">
+                                        <span>
+                                            <img alt={`영화 ${movie.movieNm}의 포스터`} />
+                                        </span>
+                                    </div>
+                                    <div className="boxoffice_movie_additional back">
+                                        <NumbersTag content={movie} propertyNm="showCnt" classNm="show_count" />
+                                        <NumbersTag content={movie} propertyNm="audiCnt" classNm="audi_count" />
+                                        <NumbersTag content={movie} propertyNm="audiAcc" classNm="audi_accumulate_count" />
+                                        <NumbersTag content={movie} propertyNm="salesAcc" classNm="sale_accumulate" />
+                                        <NumbersTag content={movie} propertyNm="salesAmt" classNm="sale_today" />
+                                    </div>
+                                </Link>
+                                <div className="boxoffice_movie_inner_bottom">
+                                    <MovieContentTag content={movie} propertyNm="movieNm" classNm="name" isTitle />
+                                    <MovieContentTag content={movie} propertyNm="openDt" classNm="open_date" />
+                                    <NumbersTag content={movie} propertyNm="audiCnt" classNm="audience_count" />
+                                    <NumbersTag content={movie} propertyNm="audiAcc" classNm="audience_accumulate" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                )}
+                    )
+                })}
+            </div>
+        )
+    }
+
+    return (
+        <div>
+            <HeaderTag />
+            <SortButtonGroupTag />
+            <div className="boxoffice">
+                <MovieTag movieList={movieList} />
             </div>
         </div>
     )

@@ -1,0 +1,139 @@
+.person{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.person_box_inner{
+    display: flex;
+    flex-direction: column;
+}
+.person_box_inner_top{
+    display: flex;
+}
+.person{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.person_box{
+    border: 1px solid black;
+    margin-top: 30px;
+    border-radius: 15px;
+    box-shadow: 1px 8px 12px 1px #000000;
+}
+.person_box_inner{
+    padding: 20px;
+}
+.person_box_inner_top::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.person_box_inner_top{
+    display: flex;
+    padding: 20px;
+}
+.person_box_inner_top--right{
+    border-left: 5px solid rgba(0, 0, 0, 0.37);
+    border-radius: 5px;
+    padding-left: 15px;
+    margin-left: 20px;
+    width: 100%;
+}
+.person_poster{
+    width: 125px;
+    height: 150px;
+}
+.person_poster > span{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+}
+.person_poster > span > img{
+    vertical-align: middle;
+}
+.person_box_inner_bottom{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.filmos_title{
+    margin-bottom: 15px;
+}
+.person_filmo_poster > span{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    border: 1px solid black;
+}
+.person_filmo{
+    margin-right: 30px;
+    width: 125px;
+}
+.person_filmo:last-child{
+    margin-right: 0px;
+}
+.person_filmo_poster{
+    width: 125px;
+    height: 150px;
+}
+.person_box_filmo_perpace > h3{
+    font-size: 1.5em;
+    margin-bottom: 1em;
+}
+.person_filmo_name > h5,.person_filmo_cast > h5{
+    text-align: center;
+}
+.person_filmos{
+    display: flex;
+    overflow-x: scroll;
+}
+.pserson_name_ko > h5::before{
+    content: "이름: ";
+}
+.pserson_name_en > h5::before{
+    content: "영어이름: ";
+}
+.pserson_role > h5::before{
+    content: "역할: ";
+}
+.person_sex > h5::before{
+    content: "성별: ";
+}
+@media (max-width:650px) {
+    .person_box_inner_top{
+        flex-direction: column;
+        align-items: center;
+    }
+    .person_box_inner_top--right{
+        border: none;
+        padding: 10px;
+        margin: 0;
+    }
+    .person_box{
+        width: 90vw;
+    }
+    .person_box_inner_top--left{
+        padding: 10px;
+    }
+}
+@media (min-width:650px) {
+    .person_box{
+        max-width: 600px;
+        min-width: 600px;
+    }
+}
+@media (min-width:950px) {
+    .person_box{
+        max-width: 900px;
+        min-width: 900px;
+    }
+}
+@media (min-width:1250px) {
+    .person_box{
+        max-width: 1200px;
+        min-width: 1200px;
+    }
+}

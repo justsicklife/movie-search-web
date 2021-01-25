@@ -1,0 +1,12 @@
+.people_table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+.people_row {
+    display: table-row;
+}
+.people_cell {
+    display: table-cell;
+    text-align: center;
+}
