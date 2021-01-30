@@ -8,7 +8,7 @@ export const getBoxOffice = () => async (dispatch, getState) => {
     dispatch({ type: GET_BOXOFFICE });
     try {
         const { date } = getState().boxOffice;
-        const res = await fetch(`http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=7c88cc83cd33def078fa2c0580e6045c&targetDt=${date}`);
+        const res = await fetch(`https://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=7c88cc83cd33def078fa2c0580e6045c&targetDt=${date}`);
         const resJson = await res.json();
         const data = resJson.boxOfficeResult.dailyBoxOfficeList;
         dispatch({ type: GET_BOXOFFICE_SUCCESS, data });
