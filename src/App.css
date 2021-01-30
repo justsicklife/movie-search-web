@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+.App {
+    width: 100vw;
+    height: 100vh;
+}
 .text-align-center{
     text-align: center;
 }
@@ -11,6 +15,16 @@
     justify-content: center;  
     margin: auto; 
     flex-direction: column;
+}
+.notfound_page{
+    width: 100%;
+    height: 89%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+    font-weight: bold;
 }
 @media (min-width: 1200px){
     .container {
