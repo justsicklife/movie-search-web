@@ -1,3 +1,6 @@
+import { companyDetailRest, apiKey } from "../api/rest/rest.js";
+
+
 const GET_COMPANY_DETAIL = "companyDetail/GET_COMPANY_DETAIL";
 const GET_COMPANY_DETAIL_SUCCESS = "companyDetail/GET_COMPANY_DETAIL_SUCCESS";
 const GET_COMPANY_DETAIL_ERROR = "companyDetail/GET_COMPANY_DETAIL_ERROR";
@@ -14,7 +17,7 @@ export const getCompanyDetail = (pCompanyCd = "") => async dispatch => {
 
 const getCompanyDetailData = async (pCompanyCd) => {
     const companyCd = pCompanyCd !== "" ? `&companyCd=${pCompanyCd}` : "";
-    const res = await fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/company/searchCompanyInfo.json?key=7c88cc83cd33def078fa2c0580e6045c${companyCd}`)
+    const res = await fetch(`${companyDetailRest}${apiKey}${companyCd}`)
     const jsonRes = await res.json();
     const sendData = jsonRes.companyInfoResult.companyInfo;
     return sendData;

@@ -148,7 +148,7 @@ const BoxOffice = ({ movieList, getBoxOffice, loading, error, onGetData, onSetSo
             return (
                 <>
                     <HeaderTag />
-                    <div>정보없음</div>
+                    <div className="text-align-center">정보없음</div>
                 </>
             )
         default:

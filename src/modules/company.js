@@ -1,3 +1,6 @@
+import { companyListRest, apiKey } from "../api/rest/rest.js";
+
+
 const GET_COMPANY = "company/GET_COMPANY";
 const GET_COMPANY_SUCCESS = "company/GET_COMPANY_SUCCESS";
 const GET_COMPANY_ERROR = "company/GET_COMPANY_ERROR";
@@ -37,7 +40,7 @@ const getCompanyData = async (pCompanyNm, pCeoNm, pCurrentPage, itemRowPage) => 
     const ceoNm = pCeoNm !== "" ? `&ceoNm=${pCeoNm}` : "";
     const currentPage = `&curPage=${pCurrentPage}`
     const itemPerPage = `&itemPerPage=${itemRowPage}`
-    const res = await fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/company/searchCompanyList.json?key=7c88cc83cd33def078fa2c0580e6045c${companyNm}${ceoNm}${currentPage}${itemPerPage}`)
+    const res = await fetch(`${companyListRest}${apiKey}${companyNm}${ceoNm}${currentPage}${itemPerPage}`)
     const jsonRes = await res.json();
     const sendData = jsonRes.companyListResult.companyList;
     return sendData;

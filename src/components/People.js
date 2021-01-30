@@ -6,7 +6,7 @@ import { LoadingBar, LoadingBarViewMore } from "../api/loadingbar/loadingbar.js"
 import { ContentTag } from "../api/contentTag/contentTag.js";
 
 
-const People = ({ onSetItemRowPage, loading, people, onGetPeople, onSetPeople, onPageUp, currentPage }) => {
+const People = ({ error, onSetItemRowPage, loading, people, onGetPeople, onSetPeople, onPageUp, currentPage }) => {
     const peopleNmRef = useRef();
     const filmoNmRef = useRef();
     const itemRowPageRef = useRef(10);
@@ -124,12 +124,30 @@ const People = ({ onSetItemRowPage, loading, people, onGetPeople, onSetPeople, o
                     </div>
                 </>
             )
+        case error:
+            return (
+                <>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                    <div className="text-align-center">에러</div>
+                </>
+            )
         case !people:
             return (
                 <>
                     <TitleTag />
                     <InputForm />
                     <SelectTag />
+                </>
+            )
+        case people.length === 0:
+            return (
+                <>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                    <div className="text-align-center">정보 없음</div>
                 </>
             )
         default:

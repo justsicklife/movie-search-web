@@ -5,7 +5,7 @@ import { LoadingBar, LoadingBarViewMore } from "../api/loadingbar/loadingbar.js"
 import { ContentTag } from "../api/contentTag/contentTag.js";
 
 
-const MovieList = ({ onSetItemRowPage, onGetMovieList, movieList, loading, onSetMovieList, onPageUp, currentPage }) => {
+const MovieList = ({ error, onSetItemRowPage, onGetMovieList, movieList, loading, onSetMovieList, onPageUp, currentPage }) => {
     const movieNmRef = useRef();
     const directorNmRef = useRef();
     const itemRowPageRef = useRef(10);
@@ -144,13 +144,22 @@ const MovieList = ({ onSetItemRowPage, onGetMovieList, movieList, loading, onSet
                     <SelectTag />
                 </>
             )
+        case error:
+            return (
+                <>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                    <div className="text-align-center">에러</div>
+                </>
+            )
         case movieList.length === 0:
             return (
                 <>
                     <TitleTag />
                     <InputForm />
                     <SelectTag />
-                    <div>정보없음</div>
+                    <div className="text-align-center">정보없음</div>
                 </>
             )
         default:

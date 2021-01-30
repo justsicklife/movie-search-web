@@ -139,7 +139,16 @@ const Company = ({ onSetItemRowPage, companyList, onGetCompany, error, loading, 
                     <TitleTag />
                     <InputForm />
                     <SelectTag />
-                    <div>정보 없음</div>
+                    <div className="text-align-center">정보 없음</div>
+                </>
+            )
+        case error:
+            return (
+                <>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                    <div className="text-align-center">에러</div>
                 </>
             )
         default:

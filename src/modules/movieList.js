@@ -1,3 +1,5 @@
+import { movieListRest, apiKey } from "../api/rest/rest.js";
+
 const GET_MOVIELIST = "movieList/GET_MOVIELIST";
 const GET_MOVIELIST_SUCCESS = "movieList/GET_MOVIELIST_SUCCESS";
 const GET_MOVIELIST_ERROR = "movieList/GET_MOVIELIST_SUCCESS";
@@ -14,7 +16,7 @@ const getMovieListAPI = async (pMovieNm, pDirectorNm, curPage, itemRowPage) => {
     const directorName = pDirectorNm !== "" ? `&directorNm=${pDirectorNm}` : "";
     const pageIndex = `&curPage=${curPage}`
     const itemPerPage = `&itemPerPage=${itemRowPage}`
-    const res = await fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json?key=7c88cc83cd33def078fa2c0580e6045c${movieName}${directorName}${pageIndex}${itemPerPage}`);
+    const res = await fetch(`${movieListRest}${apiKey}${movieName}${directorName}${pageIndex}${itemPerPage}`);
     const jsonRes = await res.json();
     const sendData = jsonRes.movieListResult.movieList;
     return sendData;

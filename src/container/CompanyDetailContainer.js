@@ -25,6 +25,7 @@ const CompanyDetailContainer = ({ match }) => {
     return <CompanyDetail
         loading={loading}
         company={company}
+        error={error}
     />
 }
 

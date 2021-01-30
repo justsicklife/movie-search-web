@@ -3,19 +3,7 @@ import { Link } from "react-router-dom";
 import { LoadingBar } from "../api/loadingbar/loadingbar.js";
 import { ContentTag } from "../api/contentTag/contentTag.js";
 
-const PeopleDetail = ({ loading, people }) => {
-
-    if (loading) {
-        return <LoadingBar />
-    }
-
-    if (!people && !loading) {
-        return (
-            <>
-                <div>정보 없음</div>
-            </>
-        )
-    }
+const PeopleDetail = ({ loading, people, error }) => {
 
     const FilmosTag = ({ filmos }) => {
         return (
@@ -41,35 +29,47 @@ const PeopleDetail = ({ loading, people }) => {
         )
     }
 
-    return (
-        <div className="person">
-            <div className="person_box">
-                <div className="person_box_inner">
-                    <div className="person_box_inner_top">
-                        <div className="person_box_inner_top--left">
-                            <div className="person_poster">
-                                <span>
-                                    <img alt={`${people.peopleNm}의 사진`}></img>
-                                </span>
+    switch (true) {
+        case loading:
+            return (
+                <LoadingBar />
+            )
+        case !people && !loading:
+            return (
+                <div className="text-align-center">정보 없음</div>
+            )
+        default:
+            return (
+                <div className="person">
+                    <div className="person_box">
+                        <div className="person_box_inner">
+                            <div className="person_box_inner_top">
+                                <div className="person_box_inner_top--left">
+                                    <div className="person_poster">
+                                        <span>
+                                            <img alt={`${people.peopleNm}의 사진`}></img>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="person_box_inner_top--right">
+                                    <ContentTag content={people} propertyName={"peopleNm"} classNm="pserson_name_ko" />
+                                    <ContentTag content={people} propertyName={"peopleNmEn"} classNm="pserson_name_en" />
+                                    <ContentTag content={people} propertyName={"repRoleNm"} classNm="pserson_role" />
+                                    <ContentTag content={people} propertyName={"sex"} classNm="person_sex" />
+                                </div>
                             </div>
-                        </div>
-                        <div className="person_box_inner_top--right">
-                            <ContentTag content={people} propertyName={"peopleNm"} classNm="pserson_name_ko" />
-                            <ContentTag content={people} propertyName={"peopleNmEn"} classNm="pserson_name_en" />
-                            <ContentTag content={people} propertyName={"repRoleNm"} classNm="pserson_role" />
-                            <ContentTag content={people} propertyName={"sex"} classNm="person_sex" />
-                        </div>
-                    </div>
-                    <div className="person_box_inner_bottom">
-                        <div className="person_box_inner_botom--all">
-                            <div className="person_box_filmo_perpace"><h3>필모리스트</h3></div>
-                            <FilmosTag filmos={people.filmos} />
+                            <div className="person_box_inner_bottom">
+                                <div className="person_box_inner_botom--all">
+                                    <div className="person_box_filmo_perpace"><h3>필모리스트</h3></div>
+                                    <FilmosTag filmos={people.filmos} />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    )
+            )
+    }
+
 }
 
 export default PeopleDetail;

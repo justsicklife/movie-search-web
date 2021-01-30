@@ -1,3 +1,5 @@
+import { peopleRest, apiKey } from "../api/rest/rest.js";
+
 const GET_PEOPLE = "people/GET_PEOPLE";
 const GET_PEOPLE_SUCCESS = "people/GET_PEOPLE_SUCCESS";
 const GET_PEOPLE_ERROR = "people/GET_PEOPLE_ERROR";
@@ -33,7 +35,7 @@ const getPeopleData = async (pPeopleNm = "", pFilmoNm = "", currentPage, itemRow
     const filmoNames = pFilmoNm !== "" ? `&filmoNames=${pFilmoNm}` : "";
     const curPage = `&curPage=${currentPage}`;
     const itemPerPage = `&itemPerPage=${itemRowPage}`
-    const res = await fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleList.json?key=7c88cc83cd33def078fa2c0580e6045c${peopleNm}${curPage}${filmoNames}${itemPerPage}`)
+    const res = await fetch(`${peopleRest}${apiKey}${peopleNm}${curPage}${filmoNames}${itemPerPage}`)
     const jsonRes = await res.json();
     const sendData = jsonRes.peopleListResult.peopleList;
     return sendData;

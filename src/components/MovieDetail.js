@@ -7,9 +7,6 @@ import { ContentTag, ContentsTag } from "../api/contentTag/contentTag.js";
 
 const MovieDetail = ({ movie, error, loading }) => {
 
-    if (loading) return <LoadingBar />;
-    if (!movie) return <div>정보없음</div>;
-
     const { movieInfo } = movie.movieInfoResult;
 
     const MovieTitleTag = ({ movieName, moviePrdYear }) => {
@@ -73,38 +70,51 @@ const MovieDetail = ({ movie, error, loading }) => {
         )
     }
 
-    return (
-        <>
-            <div className="movie">
-                <MovieTitleTag movieName={movieInfo.movieNm} moviePrdYear={movieInfo.prdtYear} />
-                <div className="movie_box">
-                    <div className="movie_box_inner">
-                        <div className="movie_box_inner_top">
-                            <div className="movie_box_inner_top--left">
-                                <div className="movie_poster">
-                                    <span>
-                                        <img alt={`영화 ${movieInfo.movieNm}의 포스터`}></img>
-                                    </span>
+    switch (true) {
+        case loading:
+            return (
+                <LoadingBar />
+            )
+        case !movie:
+            return (
+                <div className="text-align-center">정보없음</div>
+            )
+        case error:
+            return (
+                <div className="text-align-center">에러</div>
+            )
+        default:
+            return (
+                <div className="movie">
+                    <MovieTitleTag movieName={movieInfo.movieNm} moviePrdYear={movieInfo.prdtYear} />
+                    <div className="movie_box">
+                        <div className="movie_box_inner">
+                            <div className="movie_box_inner_top">
+                                <div className="movie_box_inner_top--left">
+                                    <div className="movie_poster">
+                                        <span>
+                                            <img alt={`영화 ${movieInfo.movieNm}의 포스터`}></img>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="movie_box_inner_top--right">
+                                    <ContentTag content={movieInfo} classNm="movie_show_time" propertyName="showTm" />
+                                    <ContentTag content={movieInfo} callbackFn={movieOpenDate} classNm="movie_open_date" propertyName="openDt" />
+                                    <ContentsTag contents={movieInfo.nations} childClassNm="movie_nation" classNm="movie_nations" propertyName="nationNm" />
+                                    <ContentsTag contents={movieInfo.genres} childClassNm="movie_genre" classNm="movie_genres" propertyName="genreNm" />
+                                    <ContentsTag contents={movieInfo.directors} childClassNm="movie_director" classNm="movie_directors" propertyName="peopleNm" />
+                                    <MovieCompanysTag companys={movieInfo.companys} />
                                 </div>
                             </div>
-                            <div className="movie_box_inner_top--right">
-                                <ContentTag content={movieInfo} classNm="movie_show_time" propertyName="showTm" />
-                                <ContentTag content={movieInfo} callbackFn={movieOpenDate} classNm="movie_open_date" propertyName="openDt" />
-                                <ContentsTag contents={movieInfo.nations} childClassNm="movie_nation" classNm="movie_nations" propertyName="nationNm" />
-                                <ContentsTag contents={movieInfo.genres} childClassNm="movie_genre" classNm="movie_genres" propertyName="genreNm" />
-                                <ContentsTag contents={movieInfo.directors} childClassNm="movie_director" classNm="movie_directors" propertyName="peopleNm" />
-                                <MovieCompanysTag companys={movieInfo.companys} />
+                            <div className="movie_box_inner_bottom">
+                                <div className="actors_title"><h3>참여 배우</h3></div>
+                                <MovieActorsTag actors={movieInfo.actors} />
                             </div>
-                        </div>
-                        <div className="movie_box_inner_bottom">
-                            <div className="actors_title"><h3>참여 배우</h3></div>
-                            <MovieActorsTag actors={movieInfo.actors} />
                         </div>
                     </div>
                 </div>
-            </div>
-        </>
-    )
+            )
+    }
 }
 
 export default MovieDetail;

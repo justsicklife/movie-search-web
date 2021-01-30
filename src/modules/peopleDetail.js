@@ -1,5 +1,6 @@
+import { peopleDetailRest, apiKey } from "../api/rest/rest.js";
+
 const GET_PEOPLE = "PeopleDetail/GET_PEOPLE";
-const GET_PEOPLE_ID = "PeopleDetail/GET_PEOPLE_ID";
 const GET_PEOPLE_SUCCESS = "PeopleDetail/GET_PEOPLE_SUCCESS";
 const GET_PEOPLE_ERROR = "PeopleDetail/GET_PEOPLE_ERROR";
 const SET_PEOPLE_ID = "PeopleDetail/SET_PEOPLE_ID";
@@ -21,7 +22,7 @@ export const getPeopleDetail = (pPeopleId = "") => async dispatch => {
 
 const getPeopleDetailData = async (pPeopleId) => {
     const peopleCd = pPeopleId !== "" ? `&peopleCd=${pPeopleId}` : "";
-    const res = await fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/people/searchPeopleInfo.json?key=7c88cc83cd33def078fa2c0580e6045c${peopleCd}`)
+    const res = await fetch(`${peopleDetailRest}${apiKey}${peopleCd}`)
     const jsonRes = await res.json();
     const sendData = jsonRes.peopleInfoResult.peopleInfo;
     return sendData;

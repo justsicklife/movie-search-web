@@ -1,5 +1,6 @@
-const GET_MOVIE_DETAIL_ID = "movieDetail/GET_MOVIE_DETAIL_ID";
+import { movieDetailRest, apiKey } from "../api/rest/rest.js";
 
+const GET_MOVIE_DETAIL_ID = "movieDetail/GET_MOVIE_DETAIL_ID";
 const GET_MOVIE_DETAIL = "movieDetail/GET_MOVIE_DETAIL";
 const GET_MOVIE_DETAIL_SUCCESS = "movieDetail/GET_MOVIE_DETAIL_SUCCESS";
 const GET_MOVIE_DETAIL_ERROR = "movieDetail/GET_MOVIE_DETAIL_ERROR";
@@ -11,7 +12,8 @@ export const setMovieCd = (movieId) => {
 export const getMovie = (movieId) => async (dispatch) => {
     dispatch({ type: GET_MOVIE_DETAIL });
     try {
-        const res = await fetch(`http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=7c88cc83cd33def078fa2c0580e6045c&movieCd=${movieId}`)
+        const movieCd = `&movieCd=${movieId}`
+        const res = await fetch(`${movieDetailRest}${apiKey}${movieCd}`)
         const resJson = await res.json();
         const movieSend = resJson;
         dispatch({ type: GET_MOVIE_DETAIL_SUCCESS, movie: movieSend });
