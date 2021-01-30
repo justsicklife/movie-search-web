@@ -17,7 +17,6 @@ const getCompanyDetailData = async (pCompanyCd) => {
     const res = await fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/company/searchCompanyInfo.json?key=7c88cc83cd33def078fa2c0580e6045c${companyCd}`)
     const jsonRes = await res.json();
     const sendData = jsonRes.companyInfoResult.companyInfo;
-    debugger
     return sendData;
 }
 
@@ -33,17 +32,17 @@ const companyDetail = (state = initialState, action) => {
     switch (action.type) {
         case GET_COMPANY_DETAIL: {
             return {
-                company: { ...state.company, loading: true }
+                companyDetail: { ...state.companyDetail, loading: true }
             };
         }
         case GET_COMPANY_DETAIL_SUCCESS: {
             return {
-                company: { ...state.company, data: action.data, loading: false }
+                companyDetail: { ...state.companyDetail, data: action.data, loading: false }
             };
         }
         case GET_COMPANY_DETAIL_ERROR: {
             return {
-                company: { ...state.company, error: action.error, loading: false }
+                companyDetail: { ...state.companyDetail, error: action.error, loading: false }
             };
         }
         default: return state;

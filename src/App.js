@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Router>
         <Route path="/" component={NavbarContainer} />
-        <Route path="/boxoffice" component={BoxOfficeContainer} />
+        <Route exact path="/" component={BoxOfficeContainer} />
         <Route path="/movielist" component={MovieListContainer} />
         <Route path="/companys" component={CompanyContainer} />
         <Route path="/company/detail/:companyid" component={CompanyDetailContainer} />

@@ -1,31 +1,33 @@
 import "./MovieList.css";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { LoadingBar, LoadingBarViewMore } from "../api/loadingbar/loadingbar.js";
+import { ContentTag } from "../api/contentTag/contentTag.js";
 
-const MovieList = ({ onGetMovieList, movieList, loading, error }) => {
+
+const MovieList = ({ onSetItemRowPage, onGetMovieList, movieList, loading, onSetMovieList, onPageUp, currentPage }) => {
     const movieNmRef = useRef();
     const directorNmRef = useRef();
-    const inputMovie = useRef({
-        movieNm: "",
-        directorNm: "",
-    });
-    const pageIndex = useRef(null);
-    const currentMovie = useRef([]);
+    const itemRowPageRef = useRef(10);
+
+    const [itemRowPage, setItemRowPage] = useState(10);
 
     const onSubmit = (e) => {
         e.preventDefault();
-        inputMovie.current = ({
-            movieNm: movieNmRef.current.value,
-            directorNm: directorNmRef.current.value
-        });
-        pageIndex.current = 1;
-        onGetMovieList(movieNmRef.current.value, directorNmRef.current.value);
-        currentMovie.current = [];
+        if (movieNmRef.current.value === "" && directorNmRef.current.value === "") return
+        onSetMovieList(movieNmRef.current.value, directorNmRef.current.value)
+        onSetItemRowPage(itemRowPage);
+        itemRowPageRef.current = itemRowPage;
+        onGetMovieList();
+    }
+
+    const onChangeItemRowPage = (e) => {
+        setItemRowPage(e.target.value);
     }
 
     const TitleTag = () => {
         return (
-            <div>
+            <div className="container title text-align-center">
                 <h1>
                     영화검색
                 </h1>
@@ -33,37 +35,49 @@ const MovieList = ({ onGetMovieList, movieList, loading, error }) => {
         )
     }
 
+    const SelectTag = () => {
+        return (
+            <div className="container text-align-center">
+                <div>
+                    <label>검색 결과 개수</label>
+                    <select value={itemRowPage} onChange={onChangeItemRowPage} id="select-itemPerPage">
+                        <option value="1">1</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+            </div>
+        )
+    }
+
     const InputForm = () => {
         return (
-            <form onSubmit={onSubmit} type="submit">
-                <input ref={movieNmRef} placeholder="제목" type="text" />
-                <input ref={directorNmRef} placeholder="감독" type="text" />
-                <input onSubmit={onSubmit} type="submit" />
-            </form>
+            <div className="container input text-align-center">
+                <form className="movielist_form" onSubmit={onSubmit} type="submit">
+                    <fieldset className="movielist_fieldset">
+                        <input className="input_title" ref={movieNmRef} placeholder="제목" type="text" />
+                        <input className="input_director" ref={directorNmRef} placeholder="감독" type="text" />
+                        <input className="input_submit" type="submit" />
+                    </fieldset>
+                </form>
+            </div>
         )
+    }
+
+    const addOpenDate = (pString) => {
+        const year = `${pString[0]}${pString[1]}${pString[2]}${pString[3]}년`;
+        const month = `${pString[4]}${pString[5]}월`;
+        const day = `${pString[6]}${pString[7]}일`;
+        return `${year} ${month} ${day}`;
     }
 
     const movieGetMore = () => {
-        if (pageIndex.current * 10 !== currentMovie.current.length) return
-        pageIndex.current += 1;
-        onGetMovieList(inputMovie.current.movieNm, inputMovie.current.directorNm, pageIndex.current)
-    }
-
-    const MovieContentTag = ({ content, propertyNm, classNm, isTitle = false }) => {
-        return (
-            <div className={`movielist_movie_${classNm}`}>
-                {isTitle ||
-                    <h5>
-                        {content[propertyNm]}
-                    </h5>
-                }
-                {!isTitle ||
-                    <h1>
-                        {content[propertyNm]}
-                    </h1>
-                }
-            </div>
-        )
+        if (currentPage * itemRowPageRef.current !== movieList.length) return
+        onPageUp();
+        onGetMovieList();
     }
 
     const MovieTag = ({ movieList }) => {
@@ -71,10 +85,7 @@ const MovieList = ({ onGetMovieList, movieList, loading, error }) => {
             <div className="movielist_movie">
                 {movieList.map((movie) => {
                     return (
-                        <div className="movielist_movie_wrap">
-                            <div className="movielist_movie_rank_wrap">
-                                <MovieContentTag content={movie} propertyNm={"rank"} classNm="rank" />
-                            </div>
+                        <div key={movie.movieCd} className="movielist_movie_wrap">
                             <div className="movielist_movie_inner">
                                 <Link to={`/movie/detail/${movie.movieCd}`} className="movielist_movie_inner_top">
                                     <div className="movielist_movie_poster front">
@@ -84,13 +95,13 @@ const MovieList = ({ onGetMovieList, movieList, loading, error }) => {
                                     </div>
                                 </Link>
                                 <div className="movielist_movie_inner_bottom">
-                                    <MovieContentTag content={movie} propertyNm="movieNm" classNm="name_ko" isTitle />
-                                    <MovieContentTag content={movie} propertyNm="movieNmEn" classNm="name_en" />
-                                    <MovieContentTag content={movie} propertyNm="openDt" classNm="open_dt" />
-                                    <MovieContentTag content={movie} propertyNm="prdtYear" classNm="prdt_year" />
-                                    <MovieContentTag content={movie} propertyNm="prdtStatNm" classNm="prdt_stat_nm" />
-                                    <MovieContentTag content={movie} propertyNm="repNationNm" classNm="rep_nation_mm" />
-                                    <MovieContentTag content={movie} propertyNm="repGenreNm" classNm="rep_genre_nm" />
+                                    <ContentTag content={movie} propertyName="movieNm" classNm="movielist_movie_name_ko" />
+                                    <ContentTag content={movie} propertyName="movieNmEn" classNm=" movielist_movie_name_en" />
+                                    <ContentTag content={movie} callbackFn={addOpenDate} propertyName="openDt" classNm="movielist_movie_open_dt" />
+                                    <ContentTag content={movie} propertyName="prdtYear" classNm="movielist_movie_prdt_year" />
+                                    <ContentTag content={movie} propertyName="prdtStatNm" classNm="movielist_movie_prdt_stat_nm" />
+                                    <ContentTag content={movie} propertyName="repNationNm" classNm="movielist_movie_rep_nation_mm" />
+                                    <ContentTag content={movie} propertyName="repGenreNm" classNm="movielist_movie_rep_genre_nm" />
                                 </div>
                             </div>
                         </div>
@@ -101,61 +112,67 @@ const MovieList = ({ onGetMovieList, movieList, loading, error }) => {
     }
 
 
-    if (loading && currentMovie.current.length === 0) {
-        return (
-            <>
-                <TitleTag />
-                <InputForm />
-                <div className="loading_bar"><i className="fas fa-spinner"></i></div>
-            </>
-        )
-    }
-
-    if (loading) {
-        return (
-            <div>
-                <TitleTag />
-                <InputForm />
-                <div className="movielist">
-                    <div className="movielist_wrap">
-                        <MovieTag movieList={currentMovie.current} />
-                        <div className="view_more_loading">
-                            <div className="view_more_loading_icon">
-                                <i className="fas fa-spinner"></i>
-                            </div>
+    switch (true) {
+        case loading && !movieList:
+            return (
+                <>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                    <LoadingBar />
+                </>
+            )
+        case loading:
+            return (
+                <div>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                    <div className="movielist">
+                        <div className="container">
+                            <MovieTag movieList={movieList} />
+                            <LoadingBarViewMore />
                         </div>
                     </div>
-                </div>
-            </div >
-        )
-    }
-
-    if (!movieList) return (
-        <>
-            <TitleTag />
-            <InputForm />
-        </>
-    )
-
-    currentMovie.current = [...currentMovie.current, ...movieList];
-
-    return (
-        <div>
-            <TitleTag />
-            <InputForm />
-            <div className="movielist">
-                <div className="movielist_wrap">
-                    <MovieTag movieList={currentMovie.current} />
-                    {
-                        pageIndex.current * 10 === currentMovie.current.length &&
-                        <div className="view_more_button">
-                            <button onClick={movieGetMore}><i className="fas fa-chevron-circle-down"></i></button>
+                </div >
+            )
+        case !movieList:
+            return (
+                <>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                </>
+            )
+        case movieList.length === 0:
+            return (
+                <>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                    <div>정보없음</div>
+                </>
+            )
+        default:
+            return (
+                <div>
+                    <TitleTag />
+                    <InputForm />
+                    <SelectTag />
+                    <div className="movielist">
+                        <div className="container">
+                            <MovieTag movieList={movieList} />
+                            {
+                                currentPage * itemRowPageRef.current === movieList.length &&
+                                <div className="view_more_button">
+                                    <button onClick={movieGetMore}><i className="fas fa-chevron-circle-down"></i></button>
+                                </div>
+                            }
                         </div>
-                    }
-                </div>
-            </div>
-        </div >
-    )
+                    </div>
+                </div >
+            )
+    }
 }
 
 export default MovieList;

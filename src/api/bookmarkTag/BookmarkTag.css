@@ -1,0 +1,17 @@
+.bookmark{
+    display: table;
+    position: fixed;
+    top: 100%;
+    margin-top: -50px;
+    right: 0%;
+}
+.top_bookmark,.bottom_bookmark {
+    font-size: 1.5em;
+    padding: 10px 15px;
+    display: table-cell;
+    color: rgb(194, 194, 194);
+    transition: all .5s;
+    outline: none;
+    border: 1px solid white;
+    background-color: rgba(43, 43, 43, 0.507);
+}

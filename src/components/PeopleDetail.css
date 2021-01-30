@@ -16,6 +16,10 @@
     align-items: center;
     flex-direction: column;
 }
+.movie_link {
+    color: black;
+    text-decoration: none;
+}
 .person_box{
     border: 1px solid black;
     margin-top: 30px;

@@ -4,7 +4,7 @@ import { getCompanyDetail } from "../modules/companyDetail.js";
 import { useEffect } from "react";
 
 const CompanyDetailContainer = ({ match }) => {
-    const { company, loading, error } = useSelector(state => ({
+    const { loading, error, company } = useSelector(state => ({
         company: state.companyDetail.companyDetail.data,
         loading: state.companyDetail.companyDetail.loading,
         error: state.companyDetail.companyDetail.error,
@@ -20,7 +20,7 @@ const CompanyDetailContainer = ({ match }) => {
 
     useEffect(() => {
         onGetCompanyDetail(companyid)
-    }, []);
+    }, [companyid]);
 
     return <CompanyDetail
         loading={loading}

@@ -1,11 +1,159 @@
-.company_table {
-    display: table;
+.companylist_wrap {
+    display: flex;
+    justify-content: center;  
+    width: 75%;
+    margin: auto;
+    flex-direction: column;
+}
+.input_company_name,.input_company_ceo{
+    display: block;
+}
+.company_form{
+    display: inline-block;
+    
+}
+.company_fieldset{
+    border: none;
+    display: inline-block;
+    width: 200px;
+}
+.input_name,.input_ceo{
+    padding: 2px 5px;
     width: 100%;
-    table-layout: fixed;
+    height: 50px;
+    border-radius: 2px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.384);
 }
-.company_row {
-    display: table-row;
+.movie_name_ko > h1 {
+    font-size: 1.2em;
 }
-.company_cell {
-    display: table-cell;
+.movie_open_dt > h5::before {
+    content: "역할: ";
+}
+.movie_ceo_name > h5::before {
+    content: "CEO: ";
+}
+.companylist{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.companylist_company{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.view_more_button {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+.view_more_button > button{
+    font-size: 3em;
+    width: 100%;
+    height: 75px;
+    box-shadow: 0px 10px 13px -7px #000000, 4px 5px 15px 5px rgba(0,0,0,0);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.company_wrap {
+    max-width: 170px;
+    min-width: 170px;
+    margin: 30px;
+    position: relative;
+}
+.company_inner {
+    display: flex;
+    flex-direction: column;
+}
+.company_inner_top{
+    position: relative;
+    min-height: 195px;
+    max-height: 195px;
+    max-width: 170px;
+    min-width: 170px;
+    text-decoration: none;
+    color: black;
+}
+.company_poster{
+    max-width: inherit;
+    max-height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    display: inline-block;
+    border: 1px solid black;
+    position: relative;
+}
+.sort_button{
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    transition: 1s all;
+    outline: none;
+}
+.companyList_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sort_button_list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.company_rank_wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -30px;
+    margin-top: -35px;
+    font-size: 2em;
+
+}
+.company_additional{
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: inherit;
+    max-height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+.company_poster >span{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.company_name_ko > h5{
+    font-size: 1.1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.company_prdt_year > h5::before {
+    content: "개봉일: ";
+}
+.company_prdt_year > h5::after {
+    content: "년";
+}
+.company_prdt_stat_nm > h5::before {
+    content: "제작상태: ";
+}
+.company_rep_nation_mm > h5::before {
+    content: "대표제작국가: "
+}
+.company_rep_role_nm > h5::before {
+    content: "역할: ";
+}
+@media (min-width: 1200px) {
+    .companyList_wrap {
+        max-width: 1250px;
+        min-width: 1250px;
+    }
 }

@@ -1,19 +1,31 @@
 import { useDispatch, useSelector } from "react-redux"
 import MovieList from "../components/MovieList.js";
-import { getMovieList } from "../modules/movieList.js";
+import { getMovieList, setMovieList, pageUp, setItemRowPage } from "../modules/movieList.js";
 
 const MovieListContainer = () => {
-    const { movieList, loading, error } = useSelector(state => ({
+    const { movieList, loading, error, currentPage } = useSelector(state => ({
         movieList: state.movieList.movieList.data,
         loading: state.movieList.movieList.loading,
         error: state.movieList.movieList.error,
+        currentPage: state.movieList.currentPage,
     }));
-    console.log(movieList);
 
     const dispatch = useDispatch();
 
-    const onGetMovieList = (movieNm, directorNm, curPage) => {
-        dispatch(getMovieList(movieNm, directorNm, curPage))
+    const onGetMovieList = () => {
+        dispatch(getMovieList())
+    }
+
+    const onSetItemRowPage = (item) => {
+        dispatch(setItemRowPage(item));
+    }
+
+    const onPageUp = () => {
+        dispatch(pageUp());
+    }
+
+    const onSetMovieList = (movieName, directorName) => {
+        dispatch(setMovieList(movieName, directorName))
     }
 
     return (
@@ -22,6 +34,10 @@ const MovieListContainer = () => {
             movieList={movieList}
             loading={loading}
             error={error}
+            onSetMovieList={onSetMovieList}
+            onPageUp={onPageUp}
+            currentPage={currentPage}
+            onSetItemRowPage={onSetItemRowPage}
         />
     )
 

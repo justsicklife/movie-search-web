@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setPeopleId, getPeopleDetail } from "../modules/peopleDetail"
 import { useEffect } from "react";
 
+
 const PeopleDetailContainer = ({ match }) => {
     const { people, loading, error, peopleId } = useSelector(state => ({
         people: state.peopleDetail.peopleDetail.data,

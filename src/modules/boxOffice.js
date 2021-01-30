@@ -11,7 +11,6 @@ export const getBoxOffice = () => async (dispatch, getState) => {
         const res = await fetch(`http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=7c88cc83cd33def078fa2c0580e6045c&targetDt=${date}`);
         const resJson = await res.json();
         const data = resJson.boxOfficeResult.dailyBoxOfficeList;
-        console.log(data);
         dispatch({ type: GET_BOXOFFICE_SUCCESS, data });
     } catch (e) {
         dispatch({ type: GET_BOXOFFICE_ERROR, error: e });
@@ -40,7 +39,6 @@ const boxOffice = (state = initialState, action) => {
         case SET_SORT_DATE: {
             const { dataToSort } = action;
             const dataClone = state.boxOffice.data.slice();
-            console.log(dataClone);
             const sortedData = dataClone.sort((a, b) => {
                 return parseInt(a[dataToSort].replace(/[^0-9]/g, '')) - parseInt(b[dataToSort].replace(/[^0-9]/g, ''));
             })

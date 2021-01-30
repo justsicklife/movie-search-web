@@ -1,12 +1,152 @@
-.people_table {
-    display: table;
+.peoplelist{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.peoplelist_people{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.people_fieldset{
+    border: none;
+    display: inline-block;
+    width: 200px;
+}
+.input_name{
+    margin-bottom: 5px;
+}
+.form_container,.title_container,.select_container{
+    margin: 15px auto;
+}
+.input_submit {
+    display: none;
+}
+.input_name,.input_filmo{
+    padding: 2px 5px;
     width: 100%;
-    table-layout: fixed;
+    height: 50px;
+    border-radius: 2px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.384);
 }
-.people_row {
-    display: table-row;
-}
-.people_cell {
-    display: table-cell;
+.view_more_button {
     text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.view_more_loading_icon{
+    animation-name: loadingbar_turn;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    font-size: 3em;
+}
+.view_more_button > button{
+    font-size: 3em;
+    width: 100%;
+    height: 75px;
+    box-shadow: 0px 10px 13px -7px #000000, 4px 5px 15px 5px rgba(0,0,0,0);
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.people_wrap {
+    max-width: 170px;
+    min-width: 170px;
+    margin: 30px;
+    position: relative;
+}
+.people_inner {
+    display: flex;
+    flex-direction: column;
+}
+.people_inner_top{
+    position: relative;
+    min-height: 195px;
+    max-height: 195px;
+    max-width: 170px;
+    min-width: 170px;
+    text-decoration: none;
+    color: black;
+}
+.people_poster{
+    max-width: inherit;
+    max-height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    display: inline-block;
+    border: 1px solid black;
+    position: relative;
+}
+.sort_button{
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    transition: 1s all;
+    outline: none;
+}
+.peopleList_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.sort_button_list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.people_rank_wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -30px;
+    margin-top: -35px;
+    font-size: 2em;
+
+}
+.people_additional{
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: inherit;
+    max-height: inherit;
+    min-width: inherit;
+    min-height: inherit;
+    background-color: black;
+    color: white;
+    padding: 5px;
+}
+.people_poster >span{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+.people_name_ko > h5{
+    font-size: 1.1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.people_prdt_year > h5::before {
+    content: "개봉일: ";
+}
+.people_prdt_year > h5::after {
+    content: "년";
+}
+.people_prdt_stat_nm > h5::before {
+    content: "제작상태: ";
+}
+.people_rep_nation_mm > h5::before {
+    content: "대표제작국가: "
+}
+.people_rep_role_nm > h5::before {
+    content: "역할: ";
+}
+@media (min-width: 1200px) {
+    .peopleList_wrap {
+        max-width: 1250px;
+        min-width: 1250px;
+    }
 }

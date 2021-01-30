@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./MovieDetail.css";
+import { LoadingBar } from "../api/loadingbar/loadingbar.js";
+import { ContentTag, ContentsTag } from "../api/contentTag/contentTag.js";
+
 
 const MovieDetail = ({ movie, error, loading }) => {
 
-    if (loading) return <div>로딩중</div>;
+    if (loading) return <LoadingBar />;
     if (!movie) return <div>정보없음</div>;
 
     const { movieInfo } = movie.movieInfoResult;
-
-    console.log(movieInfo);
 
     const MovieTitleTag = ({ movieName, moviePrdYear }) => {
         return (
@@ -44,65 +46,11 @@ const MovieDetail = ({ movie, error, loading }) => {
         )
     }
 
-    const MovieTimeTag = ({ showTime }) => {
-        return (
-            <div className="movie_time"><h5>{`${showTime}`}</h5></div>
-        )
-    }
-
-    const MovieOpenDateTag = ({ openDate }) => {
+    const movieOpenDate = (openDate) => {
         const year = openDate.substring(0, 4);
         const month = openDate.substring(4, 6);
         const day = openDate.substring(6, 8);
-        return (
-            <div className="movie_open_date"><h5>{`${year}년 ${month}월 ${day}일`}</h5></div>
-        )
-    }
-
-    const MovieNationsTag = ({ nations }) => {
-        return (
-            <ul className="movie_nations">
-                {nations.map((nation) => {
-                    return (
-                        <li className="movie_nation">
-                            <h5>
-                                {nation.nationNm}
-                            </h5>
-                        </li>
-                    )
-                })}
-            </ul>
-        )
-    }
-
-    const MovieGenresTag = ({ genres }) => {
-        return (
-            <ul className="movie_genres">
-                {genres.map((genre) => {
-                    return (
-                        <li className="movie_genre">
-                            <h5>{genre.genreNm}</h5>
-                        </li>
-                    )
-                })}
-            </ul>
-        )
-    }
-
-    const MovieDirectorsTag = ({ directors }) => {
-        return (
-            <div className="movie_directors">
-                {directors.map((director) => {
-                    return (
-                        <div className="movie_director">
-                            <h5>
-                                {director.peopleNm}
-                            </h5>
-                        </div>
-                    )
-                })}
-            </div>
-        )
+        return `${year}년 ${month}월 ${day}일`
     }
 
     const MovieCompanysTag = ({ companys }) => {
@@ -110,10 +58,14 @@ const MovieDetail = ({ movie, error, loading }) => {
             <div className="companys">
                 {companys.map((company) => {
                     return (
-                        <div className="company">
-                            <h5>
-                                {company.companyPartNm} - {company.companyNm}
-                            </h5>
+                        <div key={Math.random()}>
+                            <Link to={`/company/detail/${company.companyCd}`}>
+                                <div className="company">
+                                    <h5>
+                                        {company.companyPartNm} - {company.companyNm}
+                                    </h5>
+                                </div>
+                            </Link>
                         </div>
                     )
                 })}
@@ -136,11 +88,11 @@ const MovieDetail = ({ movie, error, loading }) => {
                                 </div>
                             </div>
                             <div className="movie_box_inner_top--right">
-                                <MovieTimeTag showTime={movieInfo.showTm} />
-                                <MovieOpenDateTag openDate={movieInfo.openDt} />
-                                <MovieNationsTag nations={movieInfo.nations} />
-                                <MovieGenresTag genres={movieInfo.genres} />
-                                <MovieDirectorsTag directors={movieInfo.directors} />
+                                <ContentTag content={movieInfo} classNm="movie_show_time" propertyName="showTm" />
+                                <ContentTag content={movieInfo} callbackFn={movieOpenDate} classNm="movie_open_date" propertyName="openDt" />
+                                <ContentsTag contents={movieInfo.nations} childClassNm="movie_nation" classNm="movie_nations" propertyName="nationNm" />
+                                <ContentsTag contents={movieInfo.genres} childClassNm="movie_genre" classNm="movie_genres" propertyName="genreNm" />
+                                <ContentsTag contents={movieInfo.directors} childClassNm="movie_director" classNm="movie_directors" propertyName="peopleNm" />
                                 <MovieCompanysTag companys={movieInfo.companys} />
                             </div>
                         </div>

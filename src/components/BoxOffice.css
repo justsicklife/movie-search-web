@@ -55,8 +55,15 @@
     border: 1px solid black;
     position: relative;
 }
-.text-align-center{
-    text-align: center;
+.sort_button_active{
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    border: white 1px solid;
+    transition: 1s all;
+    outline: none;
 }
 .sort_button{
     padding: 5px 10px;
@@ -102,8 +109,11 @@
     width: 100%;
     height: 100%;
 }
-.boxoffice_movie_name > h1{
-    font-size: 1.2em;
+.boxoffice_movie_name > h5{
+    font-size: 1.1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .boxoffice_movie_open_date > h5::before {
     content: "개봉일: ";

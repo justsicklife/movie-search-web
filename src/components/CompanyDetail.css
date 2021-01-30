@@ -1,151 +1,160 @@
-.movie{
+.company_detail{
     display: flex;
     align-items: center;
     flex-direction: column;
 }
-.movie_title {
+.company_detail_title {
     display: flex;
     align-items: center;
     margin-top: 30px;
 }
-.movie_box{
+.company_detail_box{
     border: 1px solid black;
     margin-top: 30px;
     border-radius: 15px;
     box-shadow: 1px 8px 12px 1px #000000;
 }
-.movie_box_inner{
+.company_detail_box_inner{
     padding: 20px;
 }
-.movie_box_inner_top::after{
+.company_detail_box_inner_top::after{
     content: "";
     display: block;
     clear: both;
 }
-.movie_box_inner_top{
+.company_detail_box_inner_top{
     display: flex;
     padding: 20px;
 }
-.movie_box_inner_top--right{
+.company_detail_box_inner_top--right{
     border-left: 5px solid rgba(0, 0, 0, 0.37);
     border-radius: 5px;
     padding-left: 15px;
     margin-left: 20px;
     width: 100%;
 }
-.movie_poster{
+.company_detail_poster{
     width: 125px;
     height: 150px;
 }
-.movie_poster > span{
+.company_detail_poster > span{
     display: inline-block;
     width: 100%;
     height: 100%;
     border: 1px solid black;
 }
-.movie_poster > span > img{
+.company_detail_poster > span > img{
     vertical-align: middle;
 }
-.movie_box_inner_bottom{
+.company_detail_box_inner_bottom{
     padding: 10px;
-    /* max-width: 100%; */
-    /* overflow-x: scroll; */
+
     display: flex;
     flex-direction: column;
 }
 .actors_title{
     margin-bottom: 15px;
 }
-.movie_actor_profile > span{
+.movie_link{
+    color: black;
+    text-decoration: none;
+}
+.company_detail_filmo_poster > span{
     width: 100%;
     height: 100%;
     display: inline-block;
     border: 1px solid black;
 }
-.movie_actor{
+.company_detail_filmo{
     margin-right: 30px;
     width: 125px;
 }
-.movie_actor:last-child{
+.company_detail_filmo:last-child{
     margin-right: 0px;
 }
-.movie_actor_profile{
+.company_detail_filmo_poster{
     width: 125px;
     height: 150px;
 }
-.movie_actor_name > h5,.movie_actor_cast > h5{
+.company_detail_filmo_name > h5,.company_detail_filmo_cast > h5{
     text-align: center;
 }
-.movie_actors{
+.company_detail_filmos{
     display: flex;
     overflow-x: scroll;
 }
-.movie_nations{
+.company_detail_nations{
     display: flex;
     list-style: none;
 }
-.movie_genres{
+.company_detail_genres{
     display: flex;
     list-style: none;
 }
-.movie_genre > h5::after{
+.company_detail_parts{
+    display: flex;
+}
+.company_detail_name_ko > h5::before{
+    content: "회사: ";
+}
+.company_detail_name_en > h5::before{
+    content: "회사(영어): ";
+}
+.company_detail_ceo_name > h5::before{
+    content: "대표자: ";
+}
+.company_detail_parts > .company_part:first-child > h5::before{
+    content: "역할: ";
+}
+.company_detail_parts > .company_part > h5::after{
     content: ",";
 }
-.movie_genre:last-child > h5::after{
+.company_detail_parts > .company_part:last-child > h5::after{
     content: "";
 }
-.movie_genre:first-child > h5::before{
-    content: "장르: ";
-}
-.movie_show_time > h5::after{
-    content: "분";
-}
-.movie_nation:first-child > h5::before {
-    content: "제작국가: ";
-}
-.movie_nation > h5::after {
+.company_detail_nation > h5::after {
     content: ",";
 }
-.movie_nation:last-child > h5::after {
+.company_detail_nation:last-child > h5::after {
     content: "";
 }
-.movie_director > h5::before {
+.company_detail_director > h5::before {
     content: "감독: ";
 }
-.movie_open_date > h5::before {
+.company_detail_open_date > h5::before {
     content: "개봉일: ";
 }
-.movie_show_time > h5::before {
+.company_detail_time > h5::before {
     content: "재생시간: ";
 }
 @media (max-width:650px) {
-    .movie_box_inner_top{
+    .company_detail_box_inner_top{
         flex-direction: column;
         align-items: center;
     }
-    .movie_box_inner_top--right{
+    .company_detail_box_inner_top--right{
         border: none;
         padding: 10px;
         margin: 0;
     }
-    .movie_box{
+    .company_detail_box{
         width: 90vw;
     }
 }
 @media (min-width:650px) {
-    .movie_box{
+    .company_detail_box{
         max-width: 600px;
         min-width: 600px;
     }
 }
 @media (min-width:950px) {
-    .movie_box{
+    .company_detail_box{
         max-width: 900px;
         min-width: 900px;
     }
 }
 @media (min-width:1250px) {
-    .movie_box{
+    .company_detail_box{
         max-width: 1200px;
         min-width: 1200px;
     }

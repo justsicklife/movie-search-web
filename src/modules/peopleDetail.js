@@ -40,7 +40,7 @@ const PeopleDetail = (state = initialState, action) => {
     switch (action.type) {
         case SET_PEOPLE_ID: {
             return {
-                peopleDetail: { ...state.PeopleDetail },
+                ...state,
                 peopleId: action.peopleId,
             }
         }
