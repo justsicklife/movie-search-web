@@ -7,7 +7,7 @@ import { ContentTag, ContentsTag } from "../api/contentTag/contentTag.js";
 
 const MovieDetail = ({ movie, error, loading }) => {
 
-    const { movieInfo } = movie.movieInfoResult;
+    console.log(movie);
 
     const MovieTitleTag = ({ movieName, moviePrdYear }) => {
         return (
@@ -86,29 +86,29 @@ const MovieDetail = ({ movie, error, loading }) => {
         default:
             return (
                 <div className="movie">
-                    <MovieTitleTag movieName={movieInfo.movieNm} moviePrdYear={movieInfo.prdtYear} />
+                    <MovieTitleTag movieName={movie.movieNm} moviePrdYear={movie.prdtYear} />
                     <div className="movie_box">
                         <div className="movie_box_inner">
                             <div className="movie_box_inner_top">
                                 <div className="movie_box_inner_top--left">
                                     <div className="movie_poster">
                                         <span>
-                                            <img alt={`영화 ${movieInfo.movieNm}의 포스터`}></img>
+                                            <img alt={`영화 ${movie.movieNm}의 포스터`}></img>
                                         </span>
                                     </div>
                                 </div>
                                 <div className="movie_box_inner_top--right">
-                                    <ContentTag content={movieInfo} classNm="movie_show_time" propertyName="showTm" />
-                                    <ContentTag content={movieInfo} callbackFn={movieOpenDate} classNm="movie_open_date" propertyName="openDt" />
-                                    <ContentsTag contents={movieInfo.nations} childClassNm="movie_nation" classNm="movie_nations" propertyName="nationNm" />
-                                    <ContentsTag contents={movieInfo.genres} childClassNm="movie_genre" classNm="movie_genres" propertyName="genreNm" />
-                                    <ContentsTag contents={movieInfo.directors} childClassNm="movie_director" classNm="movie_directors" propertyName="peopleNm" />
-                                    <MovieCompanysTag companys={movieInfo.companys} />
+                                    <ContentTag content={movie} classNm="movie_show_time" propertyName="showTm" />
+                                    <ContentTag content={movie} callbackFn={movieOpenDate} classNm="movie_open_date" propertyName="openDt" />
+                                    <ContentsTag contents={movie.nations} childClassNm="movie_nation" classNm="movie_nations" propertyName="nationNm" />
+                                    <ContentsTag contents={movie.genres} childClassNm="movie_genre" classNm="movie_genres" propertyName="genreNm" />
+                                    <ContentsTag contents={movie.directors} childClassNm="movie_director" classNm="movie_directors" propertyName="peopleNm" />
+                                    <MovieCompanysTag companys={movie.companys} />
                                 </div>
                             </div>
                             <div className="movie_box_inner_bottom">
                                 <div className="actors_title"><h3>참여 배우</h3></div>
-                                <MovieActorsTag actors={movieInfo.actors} />
+                                <MovieActorsTag actors={movie.actors} />
                             </div>
                         </div>
                     </div>

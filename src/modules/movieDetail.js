@@ -15,7 +15,7 @@ export const getMovie = (movieId) => async (dispatch) => {
         const movieCd = `&movieCd=${movieId}`
         const res = await fetch(`${movieDetailRest}${apiKey}${movieCd}`)
         const resJson = await res.json();
-        const movieSend = resJson;
+        const movieSend = resJson.movieInfoResult.movieInfo;
         dispatch({ type: GET_MOVIE_DETAIL_SUCCESS, movie: movieSend });
     } catch (e) {
         dispatch({ type: GET_MOVIE_DETAIL_ERROR, error: e });

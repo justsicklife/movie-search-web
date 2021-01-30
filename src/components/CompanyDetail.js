@@ -11,7 +11,7 @@ const CompanyDetail = ({ error, company, loading }) => {
             <div className="company_detail_filmos">
                 {filmos.map((filmo) => {
                     return (
-                        <div key={`${filmo.movieCd}`} className="company_detail_filmo">
+                        <div key={`${Math.random()}${filmo.movieCd}`} className="company_detail_filmo">
                             <Link
                                 className="movie_link"
                                 to={`/movie/detail/${filmo.movieCd}`}
