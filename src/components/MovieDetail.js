@@ -7,8 +7,6 @@ import { ContentTag, ContentsTag } from "../api/contentTag/contentTag.js";
 
 const MovieDetail = ({ movie, error, loading }) => {
 
-    console.log(movie);
-
     const MovieTitleTag = ({ movieName, moviePrdYear }) => {
         return (
             <div className="movie_title">
