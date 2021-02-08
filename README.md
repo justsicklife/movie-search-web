@@ -4,6 +4,8 @@
 영화 진흥위원회 API를 사용하여 제작함
 -------------
 
+  리액트,리덕스,리덕스 thunk,리액트 라우터 룰 사용하였다.
+
 [사이트 보러가기](https://justsicklife.github.io/movie-search-web/)
 
 ### 폴더 구조 
@@ -53,3 +55,5 @@
     * loadingbar.css
   * rest
     * rest.js
+    
+ 
