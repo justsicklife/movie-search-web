@@ -5,3 +5,51 @@
 -------------
 
 [사이트 보러가기](https://justsicklife.github.io/movie-search-web/)
+
+### 폴더 구조 
+* components
+  * BoxOffice.js
+  * BoxOffice.css
+  * Company.js
+  * Company.css
+  * CompanyDetail.js
+  * CompanyDetail.css
+  * MovieDetail.js
+  * MovieDetail.css
+  * MovieList.js
+  * MovieList.css
+  * Navbar.js
+  * Navbar.css
+  * People.js
+  * People.css
+  * PeopleDetail.js
+  * PeopleDetail.css
+* container
+  * BoxOfficeContainer.js
+  * CompanyContainer.js
+  * CompanyDetailContainer.js
+  * MovieDetailContainer.js
+  * MovieListContainer.js
+  * NavbarContainer.js
+  * PeopleContainer.js
+  * PeopleDetailContainer.js
+* modules
+  * boxOffice.js
+  * company.js
+  * companyDetail.js
+  * index.js
+  * movieDetail.js
+  * movieList.js
+  * people.js
+  * peopleDetail.js
+* api
+  * bookmarkTag
+    * BookmarkTag.js
+    * BookmarkTag.css
+  * contentTag
+    * contentTag.js
+  * loadingbar
+    * loadingbar.js
+    * loadingbar.css
+  * rest
+    * rest.js
