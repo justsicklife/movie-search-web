@@ -1,29 +1,35 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import "./Company.css";
 import { useState } from "react"
 import { Link } from "react-router-dom";
-import { LoadingBar, LoadingBarViewMore } from "../api/loadingbar/loadingbar.js";
-import { ContentTag } from "../api/contentTag/contentTag.js";
+import { LoadingBar, LoadingBarViewMore } from "../tag/loadingbar/loadingbar.js";
+import { ContentTag } from "../tag/contentTag/contentTag.js";
 
 
-const Company = ({ onSetItemRowPage, companyList, onGetCompany, error, loading, currentPage, onPageUp, onSetCompany }) => {
+const Company = ({ itemRowPage, ceoName, companyName, onSetItemRowPage, companyList, onGetCompany, error, loading, currentPage, onPageUp, onSetCompany }) => {
     const companyNmRef = useRef();
     const ceoNmRef = useRef();
     const itemRowPageRef = useRef(10);
 
-    const [itemRowPage, setItemRowPage] = useState(10);
+    useEffect(() => {
+        companyNmRef.current.value = companyName;
+        itemRowPageRef.current.value = itemRowPage;
+        ceoNmRef.current.value = ceoName;
+    });
 
     const onSubmit = (e) => {
         e.preventDefault();
         if (companyNmRef.current.value === "" && ceoNmRef.current.value === "") return
         onSetCompany(companyNmRef.current.value, ceoNmRef.current.value);
-        onSetItemRowPage(itemRowPage);
-        itemRowPageRef.current = itemRowPage;
+        onSetItemRowPage(itemRowPageRef.current.value);
         onGetCompany();
     }
 
     const onChangeItemRowPage = (e) => {
-        setItemRowPage(e.target.value);
+        onSetItemRowPage(itemRowPageRef.current.value);
+        if (companyNmRef.current.value === "" && ceoNmRef.current.value === "") return
+        onSetCompany(companyNmRef.current.value, ceoNmRef.current.value);
+        onGetCompany();
     }
 
     const SelectTag = () => {
@@ -31,7 +37,7 @@ const Company = ({ onSetItemRowPage, companyList, onGetCompany, error, loading, 
             <div className="container text-align-center">
                 <div>
                     <label>검색 결과 개수</label>
-                    <select value={itemRowPage} onChange={onChangeItemRowPage} id="select-itemPerPage">
+                    <select ref={itemRowPageRef} onChange={onChangeItemRowPage} id="select-itemPerPage">
                         <option value="1">1</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -70,6 +76,7 @@ const Company = ({ onSetItemRowPage, companyList, onGetCompany, error, loading, 
     }
 
     const companyGetMore = () => {
+        if (currentPage * itemRowPage !== companyList.length) return
         onPageUp();
         onGetCompany();
     }
@@ -161,7 +168,7 @@ const Company = ({ onSetItemRowPage, companyList, onGetCompany, error, loading, 
                         <div className="companyList_wrap">
                             <CompanyTag keyName="companyCd" companyList={companyList} />
                             {
-                                currentPage * itemRowPageRef.current === companyList.length &&
+                                currentPage * itemRowPage === companyList.length &&
                                 <div className="view_more_button">
                                     <button onClick={companyGetMore}><i className="fas fa-chevron-circle-down"></i></button>
                                 </div>

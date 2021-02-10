@@ -1,13 +1,13 @@
 import './App.css';
-import BoxOfficeContainer from "./container/BoxOfficeContainer.js";
-import MovieDetailContainer from "./container/MovieDetailContainer.js";
+import BoxOfficePage from "./pages/BoxOfficePage.js";
+import MovieDetailPage from "./pages/MovieDetailPage.js";
 import NavbarContainer from "./container/NavbarContainer.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import MovieListContainer from "./container/MovieListContainer.js";
-import CompanyContainer from "./container/CompanyContainer.js";
-import CompanyDetailContainer from "./container/CompanyDetailContainer.js";
-import PeopleContainer from "./container/PeopleContainer.js";
-import PeopleDetailContainer from './container/PeopleDetailContainer';
+import MovieListPage from "./pages/MovieListPage.js";
+import CompanyPage from "./pages/CompanyPage.js";
+import CompanyDetailPage from "./pages/CompanyDetailPage.js";
+import PeoplePage from "./pages/PeoplePage.js";
+import PeopleDetailPage from './pages/PeopleDetailPage';
 
 function App() {
   return (
@@ -15,13 +15,13 @@ function App() {
       <Router basename={process.env.PUBLIC_URL}>
         <Route path="/" component={NavbarContainer} />
         <Switch>
-          <Route exact path="/" component={BoxOfficeContainer} />
-          <Route path="/movielist" component={MovieListContainer} />
-          <Route path="/companys" component={CompanyContainer} />
-          <Route path="/company/detail/:companyid" component={CompanyDetailContainer} />
-          <Route path="/peoplelist" component={PeopleContainer} />
-          <Route path="/people/detail/:id" component={PeopleDetailContainer} />
-          <Route path="/movie/detail/:id" component={MovieDetailContainer} />
+          <Route exact path="/" component={BoxOfficePage} />
+          <Route path="/movielist" component={MovieListPage} />
+          <Route path="/companys" component={CompanyPage} />
+          <Route path="/company/detail/:companyid" component={CompanyDetailPage} />
+          <Route path="/peoplelist" component={PeoplePage} />
+          <Route path="/people/detail/:id" component={PeopleDetailPage} />
+          <Route path="/movie/detail/:id" component={MovieDetailPage} />
           <Route path="*" component={() => {
             return <div className="notfound_page"><h5>404 Not Found</h5></div>
           }} />

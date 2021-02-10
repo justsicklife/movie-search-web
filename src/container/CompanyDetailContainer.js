@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { getCompanyDetail } from "../modules/companyDetail.js";
 import { useEffect } from "react";
 
-const CompanyDetailContainer = ({ match }) => {
+const CompanyDetailContainer = ({ id }) => {
     const { loading, error, company } = useSelector(state => ({
         company: state.companyDetail.companyDetail.data,
         loading: state.companyDetail.companyDetail.loading,
         error: state.companyDetail.companyDetail.error,
     }));
-
-    const { companyid } = match.params;
 
     const dispatch = useDispatch();
 
@@ -19,8 +17,9 @@ const CompanyDetailContainer = ({ match }) => {
     }
 
     useEffect(() => {
-        onGetCompanyDetail(companyid)
-    }, [companyid]);
+        const param = { id };
+        onGetCompanyDetail(param)
+    }, [id]);
 
     return <CompanyDetail
         loading={loading}

@@ -1,13 +1,16 @@
 import Company from "../components/Company.js";
 import { useDispatch, useSelector } from "react-redux"
-import { getCompany, setCompany, pageUp,setItemRowPage } from "../modules/company.js";
+import { getCompany, setCompany, pageUp, setItemRowPage } from "../modules/company.js";
 
 const CompanyContainer = () => {
-    const { companyList, loading, error, currentPage } = useSelector(state => ({
+    const { companyList, loading, error, currentPage, companyName, ceoName, itemRowPage } = useSelector(state => ({
         companyList: state.company.company.data,
         loading: state.company.company.loading,
         error: state.company.company.error,
         currentPage: state.company.currentPage,
+        companyName: state.company.companyName,
+        ceoName: state.company.ceoName,
+        itemRowPage: state.company.itemRowPage,
     }));
 
     const dispatch = useDispatch();
@@ -20,8 +23,8 @@ const CompanyContainer = () => {
         dispatch(getCompany());
     }
 
-    const onSetCompany = (companyName, ceoName) => {
-        dispatch(setCompany(companyName, ceoName));
+    const onSetCompany = (pCompanyName, pCeoName) => {
+        dispatch(setCompany(pCompanyName, pCeoName));
     }
 
     const onPageUp = () => {
@@ -37,6 +40,9 @@ const CompanyContainer = () => {
         onSetCompany={onSetCompany}
         currentPage={currentPage}
         onSetItemRowPage={onSetItemRowPage}
+        companyName={companyName}
+        ceoName={ceoName}
+        itemRowPage={itemRowPage}
     />
 }
 

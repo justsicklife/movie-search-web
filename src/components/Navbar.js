@@ -1,7 +1,7 @@
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 import React from "react";
-import BookmarkTag from "../api/bookmarkTag/BookmarkTag.js"
+import BookmarkTag from "../tag/bookmarkTag/BookmarkTag.js"
 
 const Navbar = () => {
     return (
@@ -14,7 +14,7 @@ const Navbar = () => {
                         exact
                         to="/"
                     >
-                        박스오피스 검색
+                        박스오피스
             </NavLink>
                     <NavLink
                         className="navbar_cell"
@@ -22,7 +22,7 @@ const Navbar = () => {
                         to="/movielist"
                         exact
                     >
-                        영화검색
+                        영화
             </NavLink>
                     <NavLink
                         className="navbar_cell"
@@ -30,7 +30,7 @@ const Navbar = () => {
                         to="/companys"
                         exact
                     >
-                        영화사 검색
+                        영화사
             </NavLink>
                     <NavLink
                         className="navbar_cell"
@@ -38,7 +38,7 @@ const Navbar = () => {
                         to="/peoplelist"
                         exact
                     >
-                        영화인 검색
+                        영화인
                 </NavLink>
                 </nav>
             </header>

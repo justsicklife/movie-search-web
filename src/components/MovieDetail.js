@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./MovieDetail.css";
-import { LoadingBar } from "../api/loadingbar/loadingbar.js";
-import { ContentTag, ContentsTag } from "../api/contentTag/contentTag.js";
+import { LoadingBar } from "../tag/loadingbar/loadingbar.js";
+import { ContentTag, ContentsTag } from "../tag/contentTag/contentTag.js";
 
 
 const MovieDetail = ({ movie, error, loading }) => {

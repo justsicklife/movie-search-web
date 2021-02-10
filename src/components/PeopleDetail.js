@@ -1,7 +1,7 @@
 import "./PeopleDetail.css";
 import { Link } from "react-router-dom";
-import { LoadingBar } from "../api/loadingbar/loadingbar.js";
-import { ContentTag } from "../api/contentTag/contentTag.js";
+import { LoadingBar } from "../tag/loadingbar/loadingbar.js";
+import { ContentTag } from "../tag/contentTag/contentTag.js";
 
 const PeopleDetail = ({ loading, people, error }) => {
 
@@ -10,7 +10,7 @@ const PeopleDetail = ({ loading, people, error }) => {
             <div className="person_filmos">
                 {filmos.map((filmo) => {
                     return (
-                        <div key={`${filmo.movieCd}`} className="person_filmo">
+                        <div key={`${Math.random()}${filmo.movieCd}`} className="person_filmo">
                             <Link
                                 className="movie_link"
                                 to={`/movie/detail/${filmo.movieCd}`}>

@@ -53,9 +53,6 @@
     display: flex;
     flex-direction: column;
 }
-.actors_title{
-    margin-bottom: 15px;
-}
 .movie_actor_profile > span{
     width: 100%;
     height: 100%;
@@ -63,7 +60,7 @@
     border: 1px solid black;
 }
 .movie_actor{
-    margin-right: 30px;
+    margin: 15px 30px 15px 0px;
     width: 125px;
 }
 .movie_actor:last-child{

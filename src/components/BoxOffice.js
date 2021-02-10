@@ -1,19 +1,22 @@
 import React, { useRef, useState } from "react";
 import "./BoxOffice.css";
 import { Link } from 'react-router-dom';
-import { LoadingBar } from "../api/loadingbar/loadingbar.js";
-import { ContentTag } from "../api/contentTag/contentTag.js";
+import { LoadingBar } from "../tag/loadingbar/loadingbar.js";
+import { ContentTag } from "../tag/contentTag/contentTag.js";
 
 
-const BoxOffice = ({ movieList, getBoxOffice, loading, error, onGetData, onSetSortData }) => {
+const BoxOffice = ({ movieList, getBoxOffice, filterDate, loading, error, onGetDate, onSetSortData }) => {
     const [date, setDate] = useState("");
     const sortButtonGroupRef = useRef();
     const sortBurrontActiveIndex = useRef(null);
 
+    console.log(loading);
+
     const onChange = (e) => {
         e.preventDefault();
         setDate(e.target.value);
-        onGetData(e.target.value);
+        const sendDate = filterDate(e.target.value);
+        onGetDate(sendDate);
     }
 
     const sortData = (propertyName, index) => {

@@ -22,3 +22,8 @@
     background: #ffbd45;
     color: black;
 }
+@media (max-width: 550px) {
+    .navbar_cell {
+        font-size: .9em;
+    }
+}

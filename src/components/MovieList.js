@@ -1,28 +1,35 @@
 import "./MovieList.css";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { LoadingBar, LoadingBarViewMore } from "../api/loadingbar/loadingbar.js";
-import { ContentTag } from "../api/contentTag/contentTag.js";
+import { LoadingBar, LoadingBarViewMore } from "../tag/loadingbar/loadingbar.js";
+import { ContentTag } from "../tag/contentTag/contentTag.js";
 
 
-const MovieList = ({ error, onSetItemRowPage, onGetMovieList, movieList, loading, onSetMovieList, onPageUp, currentPage }) => {
+const MovieList = ({ itemRowPage, directorName, movieName, error, onSetItemRowPage, onGetMovieList, movieList, loading, onSetMovieList, onPageUp, currentPage }) => {
     const movieNmRef = useRef();
     const directorNmRef = useRef();
-    const itemRowPageRef = useRef(10);
+    const itemRowPageRef = useRef();
 
-    const [itemRowPage, setItemRowPage] = useState(10);
+    useEffect(() => {
+        movieNmRef.current.value = movieName;
+        directorNmRef.current.value = directorName;
+        itemRowPageRef.current.value = itemRowPage;
+    });
 
     const onSubmit = (e) => {
         e.preventDefault();
         if (movieNmRef.current.value === "" && directorNmRef.current.value === "") return
         onSetMovieList(movieNmRef.current.value, directorNmRef.current.value)
         onSetItemRowPage(itemRowPage);
-        itemRowPageRef.current = itemRowPage;
+        itemRowPageRef.current.value = itemRowPage;
         onGetMovieList();
     }
 
     const onChangeItemRowPage = (e) => {
-        setItemRowPage(e.target.value);
+        onSetItemRowPage(itemRowPageRef.current.value);
+        if (movieNmRef.current.value === "" && directorNmRef.current.value === "") return
+        onSetMovieList(movieNmRef.current.value, directorNmRef.current.value)
+        onGetMovieList();
     }
 
     const TitleTag = () => {
@@ -40,7 +47,7 @@ const MovieList = ({ error, onSetItemRowPage, onGetMovieList, movieList, loading
             <div className="container text-align-center">
                 <div>
                     <label>검색 결과 개수</label>
-                    <select value={itemRowPage} onChange={onChangeItemRowPage} id="select-itemPerPage">
+                    <select ref={itemRowPageRef} onChange={onChangeItemRowPage} id="select-itemPerPage">
                         <option value="1">1</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -75,7 +82,7 @@ const MovieList = ({ error, onSetItemRowPage, onGetMovieList, movieList, loading
     }
 
     const movieGetMore = () => {
-        if (currentPage * itemRowPageRef.current !== movieList.length) return
+        if (currentPage * itemRowPage !== movieList.length) return
         onPageUp();
         onGetMovieList();
     }
@@ -172,7 +179,7 @@ const MovieList = ({ error, onSetItemRowPage, onGetMovieList, movieList, loading
                         <div className="container">
                             <MovieTag movieList={movieList} />
                             {
-                                currentPage * itemRowPageRef.current === movieList.length &&
+                                currentPage * itemRowPage === movieList.length &&
                                 <div className="view_more_button">
                                     <button onClick={movieGetMore}><i className="fas fa-chevron-circle-down"></i></button>
                                 </div>

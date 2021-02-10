@@ -66,7 +66,7 @@
     border: 1px solid black;
 }
 .company_detail_filmo{
-    margin-right: 30px;
+    margin: 10px 30px 10px 0;
     width: 125px;
 }
 .company_detail_filmo:last-child{
@@ -96,6 +96,8 @@
 }
 .company_detail_name_ko > h5::before{
     content: "회사: ";
+}
+.company_detail_filmos {
 }
 .company_detail_name_en > h5::before{
     content: "회사(영어): ";

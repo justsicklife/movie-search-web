@@ -1,23 +1,27 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import "./People.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LoadingBar, LoadingBarViewMore } from "../api/loadingbar/loadingbar.js";
-import { ContentTag } from "../api/contentTag/contentTag.js";
+import { LoadingBar, LoadingBarViewMore } from "../tag/loadingbar/loadingbar.js";
+import { ContentTag } from "../tag/contentTag/contentTag.js";
 
 
-const People = ({ error, onSetItemRowPage, loading, people, onGetPeople, onSetPeople, onPageUp, currentPage }) => {
+const People = ({ itemRowPage, peopleFilmo, peopleName, error, onSetItemRowPage, loading, people, onGetPeople, onSetPeople, onPageUp, currentPage }) => {
     const peopleNmRef = useRef();
     const filmoNmRef = useRef();
-    const itemRowPageRef = useRef(10);
+    const itemRowPageRef = useRef();
 
-    const [itemRowPage, setItemRowPage] = useState(10);
+    useEffect(() => {
+        peopleNmRef.current.value = peopleName;
+        filmoNmRef.current.value = peopleFilmo;
+        itemRowPageRef.current.value = itemRowPage;
+    });
 
     const onSubmit = (e) => {
         e.preventDefault();
+        if (peopleNmRef.current.value === "" && filmoNmRef.current.value === "") return;
         onSetPeople(peopleNmRef.current.value, filmoNmRef.current.value);
-        onSetItemRowPage(itemRowPage);
-        itemRowPageRef.current = itemRowPage;
+        onSetItemRowPage(itemRowPageRef.current.value);
         onGetPeople();
     }
 
@@ -30,8 +34,10 @@ const People = ({ error, onSetItemRowPage, loading, people, onGetPeople, onSetPe
     }
 
     const onChangeItemRowPage = (e) => {
-        setItemRowPage(e.target.value);
-        onSetItemRowPage(e.target.value);
+        onSetItemRowPage(itemRowPageRef.current.value);
+        if (peopleNmRef.current.value === "" && filmoNmRef.current.value === "") return;
+        onSetPeople(peopleNmRef.current.value, filmoNmRef.current.value);
+        onGetPeople();
     }
 
     const SelectTag = () => {
@@ -39,7 +45,7 @@ const People = ({ error, onSetItemRowPage, loading, people, onGetPeople, onSetPe
             <div className="container select_container">
                 <div className="text-align-center">
                     <label>검색 결과 개수</label>
-                    <select value={itemRowPage} onChange={onChangeItemRowPage} id="select-itemPerPage">
+                    <select ref={itemRowPageRef} onChange={onChangeItemRowPage} id="select-itemPerPage">
                         <option value="1">1</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -67,7 +73,7 @@ const People = ({ error, onSetItemRowPage, loading, people, onGetPeople, onSetPe
     }
 
     const PeopleGetMore = () => {
-        if (currentPage * itemRowPageRef.current !== people.length) return
+        if (currentPage * itemRowPage !== people.length) return
         onPageUp();
         onGetPeople()
     }
@@ -160,7 +166,7 @@ const People = ({ error, onSetItemRowPage, loading, people, onGetPeople, onSetPe
                         <div className="container">
                             <PeopleTag keyName="peopleCd" PeopleList={people} />
                             {
-                                currentPage * itemRowPageRef.current === people.length &&
+                                currentPage * itemRowPage === people.length &&
                                 <div className="view_more_button">
                                     <button onClick={PeopleGetMore}><i className="fas fa-chevron-circle-down"></i></button>
                                 </div>

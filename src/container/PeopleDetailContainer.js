@@ -4,15 +4,13 @@ import { setPeopleId, getPeopleDetail } from "../modules/peopleDetail"
 import { useEffect } from "react";
 
 
-const PeopleDetailContainer = ({ match }) => {
+const PeopleDetailContainer = ({ id }) => {
     const { people, loading, error, peopleId } = useSelector(state => ({
         people: state.peopleDetail.peopleDetail.data,
         loading: state.peopleDetail.peopleDetail.loading,
         error: state.peopleDetail.peopleDetail.error,
         peopleId: state.peopleDetail.peopleId,
     }));
-
-    const { id } = match.params;
 
     const dispatch = useDispatch();
 
@@ -26,8 +24,8 @@ const PeopleDetailContainer = ({ match }) => {
 
     useEffect(() => {
         if (peopleId === id) return
-        onGetPeopleDetail(id);
         onSetPeopleId(id);
+        onGetPeopleDetail(id);
     }, []);
 
     return <PeopleDetail

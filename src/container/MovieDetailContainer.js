@@ -3,15 +3,13 @@ import { getMovie, setMovieCd } from "../modules/movieDetail.js";
 import MovieDetail from "../components/MovieDetail.js";
 import { useEffect } from "react";
 
-const MovieDetailContainer = ({ match }) => {
+const MovieDetailContainer = ({ id }) => {
     const { movie, movieId, error, loading } = useSelector(state => ({
         movie: state.movieDetail.movie.data,
         loading: state.movieDetail.movie.loading,
         error: state.movieDetail.movie.error,
         movieId: state.movieDetail.movieId,
     }));
-
-    const { id } = match.params;
 
     const dispatch = useDispatch();
 
@@ -25,9 +23,10 @@ const MovieDetailContainer = ({ match }) => {
 
     useEffect(() => {
         if (movieId === id) return
+        const param = { id };
         onSetMovieId(id);
-        onGetMovie(id);
-    }, []);
+        onGetMovie(param);
+    }, [id]);
 
     return (
         <div>

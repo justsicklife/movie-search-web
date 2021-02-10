@@ -1,4 +1,5 @@
-import { boxOfficeRest, apiKey } from "../api/rest/rest.js";
+import getBoxOfficeData from "../api/boxOffice.js";
+import { reducerUtils, createPromiseThunk, handleAsyncActions } from "../lib/asyncUtils";
 
 const GET_BOXOFFICE = "boxOffice/GET_BOXOFFICE";
 const GET_BOXOFFICE_SUCCESS = "boxOffice/GET_BOXOFFICE_SUCCESS";
@@ -6,19 +7,7 @@ const GET_BOXOFFICE_ERROR = "boxOffice/GET_BOXOFFICE_ERROR";
 const GET_DATE = "boxOffice/GET_DATE";
 const SET_SORT_DATE = "boxOffice/SET_SORT_DATE";
 
-export const getBoxOffice = () => async (dispatch, getState) => {
-    dispatch({ type: GET_BOXOFFICE });
-    try {
-        const { date } = getState().boxOffice;
-        const targetDate = `&targetDt=${date}`
-        const res = await fetch(`${boxOfficeRest}${apiKey}${targetDate}`);
-        const resJson = await res.json();
-        const data = resJson.boxOfficeResult.dailyBoxOfficeList;
-        dispatch({ type: GET_BOXOFFICE_SUCCESS, data });
-    } catch (e) {
-        dispatch({ type: GET_BOXOFFICE_ERROR, error: e });
-    }
-}
+export const getBoxOffice = createPromiseThunk(GET_BOXOFFICE, getBoxOfficeData);
 
 export const getData = (date) => {
     return { type: GET_DATE, date };
@@ -29,11 +18,7 @@ export const setSortData = (dataToSort) => {
 }
 
 const initialState = {
-    boxOffice: {
-        data: null,
-        loading: false,
-        error: null,
-    },
+    boxOffice: reducerUtils.initial(),
     date: null,
 }
 
@@ -51,20 +36,9 @@ const boxOffice = (state = initialState, action) => {
             }
         }
         case GET_BOXOFFICE:
-            return {
-                ...state,
-                boxOffice: { ...state.boxOffice, loading: true }
-            };
         case GET_BOXOFFICE_SUCCESS:
-            return {
-                ...state,
-                boxOffice: { ...state.boxOffice, data: action.data, loading: false },
-            };
         case GET_BOXOFFICE_ERROR:
-            return {
-                ...state,
-                boxOffice: { ...state.boxOffice, error: action.error, loading: false },
-            };
+            return handleAsyncActions(GET_BOXOFFICE, 'boxOffice', false)(state, action);
         case GET_DATE:
             return {
                 ...state,

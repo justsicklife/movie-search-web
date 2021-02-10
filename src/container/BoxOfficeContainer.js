@@ -8,32 +8,39 @@ const BoxOfficeContainer = () => {
         loading: state.boxOffice.boxOffice.loading,
         error: state.boxOffice.boxOffice.error,
     }));
+
     const dispatch = useDispatch();
 
-    const onGetBoxOffice = () => {
-        dispatch(getBoxOffice());
+    const onGetBoxOffice = (date) => {
+        dispatch(getBoxOffice(date));
     }
 
     const onSetSortData = (dataToSort) => {
         dispatch(setSortData(dataToSort))
     }
 
-    const onGetData = (date) => {
+    const onGetDate = (date) => {
+        dispatch(getData(date));
+    }
+
+    const filterDate = (date) => {
         const filterdDate = date.split('-');
         const year = filterdDate[0];
         const month = filterdDate[1];
         const day = filterdDate[2];
         const sendDate = `${year}${month}${day}`
-        dispatch(getData(sendDate));
+        return sendDate;
     }
+
     return (
         <BoxOffice
             loading={loading}
             error={error}
             movieList={movieList}
             getBoxOffice={onGetBoxOffice}
-            onGetData={onGetData}
+            onGetDate={onGetDate}
             onSetSortData={onSetSortData}
+            filterDate={filterDate}
         />
     )
 }
