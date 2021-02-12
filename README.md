@@ -63,7 +63,7 @@
     * MovieListPage.js
     * PeopleDetailPage.js
     * PeoplePage.js
-   * tag
+ * tag
     * bookmarkTag
       * BookmarkTag.js
       * BookmarkTag.css
