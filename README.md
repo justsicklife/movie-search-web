@@ -45,33 +45,33 @@
   * people.js
   * peopleDetail.js
 * api
-  * boxOffice.js
-  * company.js
-  * companyDetail.js
-  * key.js
-  * movieDetail.js
-  * movieList.js
-  * people.js
-  * peopleDetail.js
+    * boxOffice.js
+    * company.js
+    * companyDetail.js
+    * key.js
+    * movieDetail.js
+    * movieList.js
+    * people.js
+    * peopleDetail.js
  * lib 
-  * asyncUtils.js
+    * asyncUtils.js
  * pages
-  * BoxOfficePage.js
-  * CompanyDetailPage.js
-  * CompanyPage.js
-  * MovieDetailPage.js
-  * MovieListPage.js
-  * PeopleDetailPage.js
-  * PeoplePage.js
- * tag
-  * bookmarkTag
-    * BookmarkTag.js
-    * BookmarkTag.css
-  * contentTag
-    * contentTag.js
-  * loadingbar
-    * loadingbar.js
-    * loadingbar.css
+    * BoxOfficePage.js
+    * CompanyDetailPage.js
+    * CompanyPage.js
+    * MovieDetailPage.js
+    * MovieListPage.js
+    * PeopleDetailPage.js
+    * PeoplePage.js
+   * tag
+    * bookmarkTag
+      * BookmarkTag.js
+      * BookmarkTag.css
+    * contentTag
+      * contentTag.js
+    * loadingbar
+      * loadingbar.js
+      * loadingbar.css
 ### components 폴더 설명
       프리젠테이션널 컴포넌트로서 리덕스 스토어에 직접적으로 접근하지 않고 props만 받아와서 사용하는 컴포넌트
 ### container 폴더 설명
