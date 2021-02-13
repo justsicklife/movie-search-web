@@ -103,6 +103,7 @@
       페이지들을 모아놓은 폴더입니다.
 #### BoxOfficePage.js 파일 설명
       선택한 날짜의 박스오피스 정보를 볼수있습니다.
+![boxoffice](https://user-images.githubusercontent.com/59939039/107853609-59f0d700-6e5a-11eb-8d69-89b2ff50fafa.PNG)
 #### MovieListPage.js 파일 설명
       영화 검색 페이지 입니다.
 ![movielist](https://user-images.githubusercontent.com/59939039/107851918-a20afc00-6e50-11eb-91de-d419c3cf3a17.PNG)
