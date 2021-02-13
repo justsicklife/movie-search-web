@@ -13,8 +13,6 @@ const MovieListContainer = () => {
         itemRowPage: state.movieList.itemRowPage,
     }));
 
-    console.log(currentPage, movieName, directorName,itemRowPage);
-
     const dispatch = useDispatch();
 
     const onGetMovieList = () => {

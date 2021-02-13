@@ -8,7 +8,6 @@ const getPeopleDetailData = async (param, getState) => {
     const res = await fetch(`${peopleDetailRest}${key}${restPeopleId}`)
     const jsonRes = await res.json();
     const sendData = jsonRes.peopleInfoResult.peopleInfo;
-    console.log(sendData);
     return sendData;
 }
 

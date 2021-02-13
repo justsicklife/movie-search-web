@@ -10,8 +10,6 @@ const BoxOffice = ({ movieList, getBoxOffice, filterDate, loading, error, onGetD
     const sortButtonGroupRef = useRef();
     const sortBurrontActiveIndex = useRef(null);
 
-    console.log(loading);
-
     const onChange = (e) => {
         e.preventDefault();
         setDate(e.target.value);
