@@ -105,16 +105,22 @@
       선택한 날짜의 박스오피스 정보를 볼수있습니다.
 #### MovieListPage.js 파일 설명
       영화 검색 페이지 입니다.
+![movielist](https://user-images.githubusercontent.com/59939039/107851918-a20afc00-6e50-11eb-91de-d419c3cf3a17.PNG)
 #### MovieDetailPage.js 파일 설명
       영화의 정보를 자세하게 볼수있습니다.
+![moviedetail](https://user-images.githubusercontent.com/59939039/107851919-a2a39280-6e50-11eb-9717-02775f36926c.PNG)
 #### PeoplePage.js 파일 설명
       영화인을 검색할 페이지 입니다.
+![actor](https://user-images.githubusercontent.com/59939039/107851912-a0413880-6e50-11eb-8bc7-9f8854a7a8bc.PNG)
 #### PeopleDetailPage 파일 설명
       영화인을 자세한 정보를 볼수있는 페이지 입니다.
+![peopledetail](https://user-images.githubusercontent.com/59939039/107851907-9f100b80-6e50-11eb-999e-566301fc56ea.PNG)
 #### CompanyPage.js 파일 설명
       영화사를 검색하는 페이지 입니다.
+![companylist](https://user-images.githubusercontent.com/59939039/107851917-a1726580-6e50-11eb-995b-6c37434c68b9.PNG)
 #### CompanyDetailPage.js 파일 설명
-      영화사에 대한 정보를 자세하게 볼수있는 페이지 .
+      영화사에 대한 정보를 자세하게 볼수있는 페이지.
+![companydetail](https://user-images.githubusercontent.com/59939039/107851916-a0d9cf00-6e50-11eb-8682-d3f95320ba36.PNG)
 ### tag 폴더
       반복되어서 쓰이는 태그들을 모아놓은 폴더입니다.
 #### bookmarkTag 폴더 설명
