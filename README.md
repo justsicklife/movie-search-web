@@ -88,7 +88,9 @@
 ### lib 폴더 설명
 #### createPromiseThunk 함수 설명
       Promise에 기반한 Thunk를 만들어주는 함수입니다.
-      이 함수의 반환값은 Promise를 요청하여 성공하면 SUCCESS Type의 dispatch를 실행하고 실패하면 ERROR Type dispatch 를 싱행합니다.
+      이 함수의 반환값은 Promise를 요청하여 
+      성공하면 SUCCESS Type의 dispatch를 실행하고
+      실패하면 ERROR Type dispatch 를 싱행합니다.
 #### reducerUtils 객체 설명
       객체안에 함수가 있는데 이함수는 객체를 반환해줍니다.
       함수의 종료는 (initial,loading,success,error) 입니다.
@@ -98,7 +100,8 @@
       error는 서버에 자원 요청을 실패했을때 이 객체를 반환합니다.
 #### handleAsyncActions 함수 설명
       비동기 관련 액션들을 처리합니다.
-      만약 매게변수 renewal이 true 라면 자원을 받을때 전에 받았던 자원을 지우지 않고 전에받은 자원과 현재받은 자원에 대이터를 합칩니다.
+      만약 매게변수 renewal이 true 라면 자원을 받을때 전에 받았던
+      자원을 지우지 않고 전에받은 자원과 현재받은 자원에 대이터를 합칩니다.
 ### pages 폴더 설명
       페이지들을 모아놓은 폴더입니다.
 #### BoxOfficePage.js 파일 설명
